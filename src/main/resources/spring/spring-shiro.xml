@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+
+        <property name="loginUrl" value="/login"/>
+
+        <property name="successUrl" value="/home"/>
+
+        <property name="unauthorizedUrl" value="/unauthorized"/>
+
+        <property name="filterChainDefinitions">
+            <value>
+                /static/** = anon
+                <!--/index/** = anon-->
+                <!--/admin/** = user-->
+                <!--/home/** = authc-->
+                <!--/** = authc-->
+            </value>
+        </property>
+    </bean>
+
+    <!--    anon：任何人都可以访问
+        authc：必须是登录之后才能进行访问，不包括remember me
+        user：登录用户才可以访问，包含remember me；
+        perms：指定过滤规则，这个一般是扩展使用，不会使用原生的；
+           # some example chain definitions:
+                    /index/** = anon
+                    /admin/** = authc, roles[admin]
+                    /docs/** = authc, perms[document:read]
+                    /** = authc
+                    # more URL-to-FilterChain definitions here
+        -->
+
+    <bean id="myJdbcRealm" class="org.apache.shiro.realm.jdbc.JdbcRealm">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="permissionsLookupEnabled" value="true"/>
+        <property name="authenticationQuery" value="SELECT user_password FROM user_info WHERE user_name = ?"/>
+        <property name="userRolesQuery"
+                  value="SELECT r.role_name FROM role_info r LEFT JOIN user_role_info ur on r.role_id = ur.role_id WHERE ur.user_id = (SELECT user_id FROM user_info WHERE user_name = ?) "/>
+        <property name="permissionsQuery"
+                  value="SELECT p.permission_name FROM permission_info p LEFT JOIN role_permission_info rp on p.permission_id = rp.permission_id where rp.role_id = (SELECT role_id FROM role_info where role_name = ?)"/>
+    </bean>
+
+
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <!-- Single realm app.  If you have multiple realms, use the 'realms' property instead. -->
+        <property name="realm" ref="myJdbcRealm"/>
+    </bean>
+
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor"/>
+
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
+
+</beans>
