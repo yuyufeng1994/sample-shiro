@@ -9,15 +9,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @date 2018/2/8
  */
 @Controller
-public class AdminAction {
+@RequestMapping("/admin/dashboard")
+public class DashboardAction {
 
-    @RequestMapping(value = "/admin",method = RequestMethod.GET)
-    public String toAdmin(){
-        return "admin/index";
+    @RequestMapping(value = "/index",method = RequestMethod.GET)
+    public String toIndex(){
+        return "admin/dashboard/index";
     }
 
-    @RequestMapping(value = "/home",method = RequestMethod.GET)
-    public String toHome(){
-        return "home";
-    }
 }

@@ -219,7 +219,7 @@
                 <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                 </li>
                 <li class="divider"></li>
-                <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                <li><a href="/quit"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                 </li>
             </ul>
             <!-- /.dropdown-user -->
@@ -243,22 +243,27 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                    <a href="/admin/dashboard/index"><i class="fa fa-dashboard fa-fw"></i> 仪表盘</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-envelope-o fa-fw"></i> 消息管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="/index">Flot Charts</a>
+                            <a href="/admin/message/index">消息列表</a>
                         </li>
                         <li>
-                            <a href="morris.html">Morris.js Charts</a>
+                            <a href="/admin/message/send">消息发送</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
+
                 <li>
-                    <a href="/settings"><i class="fa fa-table fa-fw"></i> 系统设置</a>
+                    <a href="/admin/authority/index"><i class="fa fa-users fa-fw"></i> 权限管理</a>
+                </li>
+
+                <li>
+                    <a href="/admin/system/index"><i class="fa fa-laptop fa-fw"></i> 系统设置</a>
                 </li>
 
                 <li>

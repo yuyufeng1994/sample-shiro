@@ -21,11 +21,11 @@ public class LoginAction {
         return "login";
     }
 
-    @RequestMapping(value = "/do-login",method = RequestMethod.GET)
-    public String doLogin(){
+    @RequestMapping(value = "/do-login",method = RequestMethod.POST)
+    public String doLogin(String username,String password){
         //3、得到Subject及创建用户名/密码身份验证Token（即用户身份/凭证）
         Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken("yyf", "12345");
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         try {
             //4、登录，即身份验证
             subject.login(token);
@@ -34,7 +34,7 @@ public class LoginAction {
             e.printStackTrace();
             //DisabledAccountException（禁用的帐号）、LockedAccountException（锁定的帐号）、UnknownAccountException（错误的帐号）、ExcessiveAttemptsException（登录失败次数过多）、IncorrectCredentialsException （错误的凭证）、ExpiredCredentialsException（过期的凭证）
         }
-        return "admin/index";
+        return "redirect:/admin/dashboard/index";
     }
 
 
@@ -42,7 +42,7 @@ public class LoginAction {
     public String doQuit(){
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
-        return "index";
+        return "redirect:/login";
     }
 
 
@@ -50,4 +50,11 @@ public class LoginAction {
     public String toUnauthorized(){
         return "unauthorized";
     }
+
+
+    @RequestMapping(value = "/success",method = RequestMethod.GET)
+    public String toSuccess(){
+        return "success";
+    }
+
 }

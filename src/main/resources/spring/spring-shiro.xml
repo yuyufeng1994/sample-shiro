@@ -10,17 +10,18 @@
 
         <property name="loginUrl" value="/login"/>
 
-        <property name="successUrl" value="/home"/>
+
+        <property name="successUrl" value="/sucess"/>
 
         <property name="unauthorizedUrl" value="/unauthorized"/>
 
         <property name="filterChainDefinitions">
             <value>
                 /static/** = anon
+                /admin/** = user
                 <!--/index/** = anon-->
-                <!--/admin/** = user-->
                 <!--/home/** = authc-->
-                <!--/** = authc-->
+
             </value>
         </property>
     </bean>
@@ -39,6 +40,7 @@
 
     <bean id="myJdbcRealm" class="org.apache.shiro.realm.jdbc.JdbcRealm">
         <property name="dataSource" ref="dataSource"/>
+        <property name="saltStyle" value="NO_SALT" />
         <property name="permissionsLookupEnabled" value="true"/>
         <property name="authenticationQuery" value="SELECT user_password FROM user_info WHERE user_name = ?"/>
         <property name="userRolesQuery"

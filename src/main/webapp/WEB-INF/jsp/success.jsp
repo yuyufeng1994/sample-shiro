@@ -9,14 +9,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>无权访问</title>
+    <title>SUCCESS</title>
     <%@include file="/WEB-INF/jsp/include/head.jsp" %>
 </head>
 <body>
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            无权访问
+            SUCCESS
         </div>
     </div>
     <%@include file="/WEB-INF/jsp/include/bodyfoot.jsp" %>
