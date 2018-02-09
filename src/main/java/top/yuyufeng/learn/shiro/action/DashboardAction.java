@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @date 2018/2/8
  */
 @Controller
-@RequestMapping("/admin/dashboard")
+@RequestMapping("/dashboard")
 public class DashboardAction {
 
     @RequestMapping(value = "/index",method = RequestMethod.GET)

@@ -68,4 +68,8 @@
       user_password = #{userPassword,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
+
+    <select id="list" resultMap="BaseResultMap">
+        SELECT  <include refid="Base_Column_List"/> FROM user_info
+    </select>
 </mapper>

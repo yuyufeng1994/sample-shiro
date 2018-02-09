@@ -16,11 +16,9 @@
 
         <property name="filterChainDefinitions">
             <value>
+                /do-login = anon
                 /static/** = anon
-                /admin/** = user
-                <!--/index/** = anon-->
-                <!--/home/** = authc-->
-
+                /** = user
             </value>
         </property>
     </bean>

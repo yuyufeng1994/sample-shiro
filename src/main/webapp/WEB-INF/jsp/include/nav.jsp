@@ -83,7 +83,8 @@
                                 <span class="pull-right text-muted">40% Complete</span>
                             </p>
                             <div class="progress progress-striped active">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100" style="width: 40%">
                                     <span class="sr-only">40% Complete (success)</span>
                                 </div>
                             </div>
@@ -99,7 +100,8 @@
                                 <span class="pull-right text-muted">20% Complete</span>
                             </p>
                             <div class="progress progress-striped active">
-                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20"
+                                     aria-valuemin="0" aria-valuemax="100" style="width: 20%">
                                     <span class="sr-only">20% Complete</span>
                                 </div>
                             </div>
@@ -115,7 +117,8 @@
                                 <span class="pull-right text-muted">60% Complete</span>
                             </p>
                             <div class="progress progress-striped active">
-                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60"
+                                     aria-valuemin="0" aria-valuemax="100" style="width: 60%">
                                     <span class="sr-only">60% Complete (warning)</span>
                                 </div>
                             </div>
@@ -131,7 +134,8 @@
                                 <span class="pull-right text-muted">80% Complete</span>
                             </p>
                             <div class="progress progress-striped active">
-                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80"
+                                     aria-valuemin="0" aria-valuemax="100" style="width: 80%">
                                     <span class="sr-only">80% Complete (danger)</span>
                                 </div>
                             </div>
@@ -243,28 +247,42 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="/admin/dashboard/index"><i class="fa fa-dashboard fa-fw"></i> 仪表盘</a>
+                    <a href="/dashboard/index"><i class="fa fa-dashboard fa-fw"></i> 仪表盘</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-envelope-o fa-fw"></i> 消息管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="/admin/message/index">消息列表</a>
+                            <a href="/message/index">消息列表</a>
                         </li>
                         <li>
-                            <a href="/admin/message/send">消息发送</a>
+                            <a href="/message/send">消息发送</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
 
                 <li>
-                    <a href="/admin/authority/index"><i class="fa fa-users fa-fw"></i> 权限管理</a>
+                    <a href="#"><i class="fa fa-users fa-fw"></i> 用户权限 <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="/authority/user/page">用户管理</a>
+                        </li>
+                        <li>
+                            <a href="/authority/role/page">角色管理</a>
+                        </li>
+                        <li>
+                            <a href="/authority/permission/page">权限管理</a>
+                        </li>
+                    </ul>
                 </li>
 
-                <li>
-                    <a href="/admin/system/index"><i class="fa fa-laptop fa-fw"></i> 系统设置</a>
-                </li>
+                <shiro:hasRole name="admin">
+                    <li>
+                        <a href="/system/index"><i class="fa fa-laptop fa-fw"></i> 系统设置</a>
+                    </li>
+                </shiro:hasRole>
+
 
                 <li>
                     <a href="#"><i class="fa fa-sitemap fa-fw"></i> 多级菜单<span class="fa arrow"></span></a>

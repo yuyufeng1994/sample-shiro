@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @date 2018/2/8
  */
 @Controller
-@RequestMapping("/admin/message")
+@RequestMapping("/message")
 public class MessageAction {
 
     @RequestMapping(value = "/index",method = RequestMethod.GET)

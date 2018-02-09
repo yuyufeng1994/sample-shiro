@@ -1,4 +1,4 @@
-package top.yuyufeng.learn.shiro.action;
+package top.yuyufeng.learn.shiro.action.authority;
 
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.stereotype.Controller;
@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @date 2018/2/8
  */
 @Controller
-@RequestMapping("/admin/authority")
 @RequiresRoles("admin")
-public class AuthorityAction {
+@RequestMapping("/authority/role")
+public class RoleAction {
 
-    @RequestMapping(value = "/index",method = RequestMethod.GET)
+    @RequestMapping(value = "/page",method = RequestMethod.GET)
     public String toIndex(){
-        return "admin/authority/index";
+        return "admin/authority/role";
     }
 
 }

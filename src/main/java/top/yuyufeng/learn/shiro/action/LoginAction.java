@@ -31,7 +31,8 @@ public class LoginAction {
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         token.setRememberMe(remember);
-        try {
+        subject.login(token);
+      /*  try {
             subject.login(token);
         } catch (UnknownAccountException e) {
             //错误的帐号
@@ -48,8 +49,8 @@ public class LoginAction {
         }catch (ExpiredCredentialsException e){
             //过期的凭证
             return "redirect:success?message=ExpiredCredentialsException";
-        }
-        return "redirect:/admin/dashboard/index";
+        }*/
+        return "redirect:/dashboard/index";
     }
 
 
