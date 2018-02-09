@@ -62,4 +62,13 @@
     </mvc:interceptors>-->
 
 
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <!-- 定义默认的异常处理页面，当该异常类型的注册时使用 -->
+        <property name="defaultErrorView" value="success"></property>
+        <!-- 定义异常处理页面用来获取异常信息的变量名，默认名为exception -->
+        <property name="exceptionAttribute" value="message"></property>
+    </bean>
+
+
+
 </beans>

@@ -10,8 +10,7 @@
 
         <property name="loginUrl" value="/login"/>
 
-
-        <property name="successUrl" value="/sucess"/>
+        <property name="successUrl" value="/success"/>
 
         <property name="unauthorizedUrl" value="/unauthorized"/>
 
@@ -53,6 +52,7 @@
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <!-- Single realm app.  If you have multiple realms, use the 'realms' property instead. -->
         <property name="realm" ref="myJdbcRealm"/>
+        <!--<property name="rememberMeManager" ref=""></property>-->
     </bean>
 
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
@@ -63,6 +63,8 @@
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
         <property name="securityManager" ref="securityManager"/>
     </bean>
+
+
 
 
 </beans>

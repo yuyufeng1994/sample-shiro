@@ -21,7 +21,7 @@
                     <h3 class="panel-title">请登录</h3>
                 </div>
                 <div class="panel-body">
-                    <form role="form" action="/do-login" method="post">
+                    <form role="form" action="/do-login" method="post" id="form-login">
                         <fieldset>
                             <div class="form-group">
                                 <input class="form-control" placeholder="用户名" name="username" type="text" autofocus>
@@ -35,7 +35,7 @@
                                     <input name="remember" type="checkbox" value="true">记住我
                                 </label>
                             </div>
-                            <button type="submit" class="btn btn-lg btn-success btn-block">登录</button>
+                            <button type="button" class="btn btn-lg btn-success btn-block" onclick="doLogin()">登录</button>
                         </fieldset>
                     </form>
                 </div>
@@ -44,4 +44,9 @@
     </div>
     <%@include file="/WEB-INF/jsp/include/bodyfoot.jsp" %>
 </body>
+<script>
+    function doLogin() {
+        $("#form-login").submit();
+    }
+</script>
 </html>

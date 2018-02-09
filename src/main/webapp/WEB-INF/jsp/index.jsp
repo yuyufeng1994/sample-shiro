@@ -31,6 +31,21 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <shiro:guest>
+                        Hi there!  Please <a href="/login">Login</a> today!
+                    </shiro:guest>
+
+                    <shiro:user>
+                    Welcome back John!  Not John
+                    </shiro:user>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+
         </div>
         <!-- /.container-fluid -->
     </div>

@@ -9,14 +9,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>SUCCESS</title>
+    <title>${message}</title>
     <%@include file="/WEB-INF/jsp/include/head.jsp" %>
 </head>
 <body>
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            SUCCESS
+            <h1>${message}</h1>
         </div>
     </div>
     <%@include file="/WEB-INF/jsp/include/bodyfoot.jsp" %>
