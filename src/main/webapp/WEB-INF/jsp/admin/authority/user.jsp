@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <table class="table table-striped" >
-                        <thead><tr><th>ID</th><th>用户名</th><th>密码</th></tr></thead>
+                        <thead><tr><th>ID</th><th>用户名</th><th>密码</th><th>操作</th></tr></thead>
                         <tbody id="data-list"></tbody>
                     </table>
                 </div>
@@ -79,7 +79,7 @@
         var list = res.list;
         var str = "";
         for (var i = 0; i < list.length; i++) {
-            str+="<tr><td>"+list[i].userId+"</td><td>"+list[i].userName+"</td><td>"+list[i].userPassword+"</td></tr>"
+            str+="<tr><td>"+list[i].userId+"</td><td>"+list[i].userName+"</td><td>"+list[i].userPassword+"</td><td></td></tr>"
         }
         $("#data-list").html(str)
     })
