@@ -15,7 +15,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>Admin 1.0.0</title>
+<title>YuAdmin 1.0</title>
 
 <!-- Bootstrap Core CSS -->
 <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">

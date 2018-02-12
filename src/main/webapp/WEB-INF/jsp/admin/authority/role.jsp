@@ -54,8 +54,8 @@
 <script>
     var yui = new YUI('#my-yui')
     yui.customConfig = {
-        server:"/authority/role/list",
-        checkBox:"single"
+        server:"/authority/role/list"
+//        checkBox:"single"
     }
     yui.create()
 </script>
