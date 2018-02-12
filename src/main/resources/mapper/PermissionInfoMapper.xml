@@ -62,4 +62,8 @@
     where permission_id = #{permissionId,jdbcType=BIGINT}
   </update>
 
+    <select id="list" resultMap="BaseResultMap">
+        SELECT  <include refid="Base_Column_List"/> FROM permission_info
+    </select>
+
 </mapper>

@@ -47,15 +47,21 @@
             </pattern>
         </encoder>
     </appender>
- 
-     
-   
-     
-     
+
+
+    <logger name="org.apache.ibatis" level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="java.sql" level="debug">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+
     <!-- root级别   DEBUG -->
     <root>
         <!-- 打印debug级别日志及以上级别日志 -->
-        <level value="info" />
+        <level value="debug" />
         <!-- 控制台输出-->
         <appender-ref ref="console" />
         <!-- 文件输出 -->

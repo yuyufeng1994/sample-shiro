@@ -6,25 +6,35 @@
         <result property="userId" column="user_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
         <result property="roleId" column="role_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
     </resultMap>
+
     <sql id="Base_Column_List">
     id, user_id, role_id
   </sql>
+
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from user_role_info
         where id = #{id,jdbcType=BIGINT}
     </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from user_role_info
     where id = #{id,jdbcType=BIGINT}
   </delete>
+
+    <delete id="deleteByUserId" parameterType="java.lang.Long">
+        delete from user_role_info
+        where user_id = #{userId,jdbcType=BIGINT}
+    </delete>
+
     <insert id="insert" parameterType="top.yuyufeng.learn.shiro.orm.po.UserRoleInfo">
     insert into user_role_info (id, user_id, role_id
       )
     values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}
       )
   </insert>
+
     <insert id="insertSelective" parameterType="top.yuyufeng.learn.shiro.orm.po.UserRoleInfo">
         insert into user_role_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -50,6 +60,7 @@
             </if>
         </trim>
     </insert>
+
     <update id="updateByPrimaryKeySelective" parameterType="top.yuyufeng.learn.shiro.orm.po.UserRoleInfo">
         update user_role_info
         <set>
@@ -62,10 +73,20 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
+
     <update id="updateByPrimaryKey" parameterType="top.yuyufeng.learn.shiro.orm.po.UserRoleInfo">
     update user_role_info
     set user_id = #{userId,jdbcType=BIGINT},
       role_id = #{roleId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+    <insert id="insertUserRoleBatch" parameterType="java.util.List">
+        INSERT INTO  user_role_info (id, user_id, role_id)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator="," >
+            (#{item.id,jdbcType=BIGINT},#{item.userId,jdbcType=BIGINT}, #{item.roleId,jdbcType=BIGINT})
+        </foreach>
+    </insert>
+
 </mapper>

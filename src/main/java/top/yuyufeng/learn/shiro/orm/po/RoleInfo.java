@@ -5,6 +5,8 @@ public class RoleInfo {
 
     private String roleName;
 
+    private Boolean roleStatus;
+
     public RoleInfo() {
     }
 
@@ -29,11 +31,20 @@ public class RoleInfo {
         return roleName;
     }
 
+    public Boolean getRoleStatus() {
+        return roleStatus;
+    }
+
+    public void setRoleStatus(Boolean roleStatus) {
+        this.roleStatus = roleStatus;
+    }
+
     @Override
     public String toString() {
         return "RoleInfo{" +
                 "roleId=" + roleId +
                 ", roleName='" + roleName + '\'' +
+                ", roleStatus=" + roleStatus +
                 '}';
     }
 }

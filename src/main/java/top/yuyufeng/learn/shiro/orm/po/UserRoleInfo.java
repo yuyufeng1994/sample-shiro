@@ -1,5 +1,8 @@
 package top.yuyufeng.learn.shiro.orm.po;
 
+/**
+ * @author yuyufeng
+ */
 public class UserRoleInfo {
     private Long id;
 
@@ -9,6 +12,13 @@ public class UserRoleInfo {
 
     public UserRoleInfo() {
     }
+
+    public UserRoleInfo(Long userId, Long roleId) {
+        this.userId = userId;
+        this.roleId = roleId;
+    }
+
+
 
     public UserRoleInfo(Long id, Long userId, Long roleId) {
         this.id = id;

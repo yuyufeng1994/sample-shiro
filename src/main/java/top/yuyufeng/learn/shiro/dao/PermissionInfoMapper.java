@@ -2,6 +2,8 @@ package top.yuyufeng.learn.shiro.dao;
 
 import top.yuyufeng.learn.shiro.orm.po.PermissionInfo;
 
+import java.util.List;
+
 public interface PermissionInfoMapper {
     int deleteByPrimaryKey(Long permissionId);
 
@@ -14,4 +16,6 @@ public interface PermissionInfoMapper {
     int updateByPrimaryKeySelective(PermissionInfo record);
 
     int updateByPrimaryKey(PermissionInfo record);
+
+    List<PermissionInfo> list();
 }

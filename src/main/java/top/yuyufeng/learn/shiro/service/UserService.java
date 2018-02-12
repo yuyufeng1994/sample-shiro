@@ -16,13 +16,5 @@ import java.util.List;
  */
 @Service
 public class UserService {
-    @Autowired
-    private UserInfoMapper userInfoMapper;
 
-    public PageInfo<UserInfo> page(int pageNum) {
-        PageHelper.startPage(pageNum, CommonConfig.PAGE_SIZE, "user_id asc");
-        List<UserInfo> list = userInfoMapper.list();
-        PageInfo<UserInfo> pageInfo = new PageInfo<>(list, CommonConfig.NAVIGATE_PAGES);
-        return pageInfo;
-    }
 }

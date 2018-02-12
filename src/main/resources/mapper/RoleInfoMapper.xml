@@ -7,6 +7,12 @@
         <result property="roleName" column="role_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <resultMap id="ResultWidthRoleStatusMap" type="top.yuyufeng.learn.shiro.orm.po.RoleInfo">
+        <result property="roleId" column="role_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        <result property="roleName" column="role_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="roleStatus" column="role_status" javaType="java.lang.Boolean" jdbcType="TINYINT"/>
+    </resultMap>
+
     <sql id="Base_Column_List">
     role_id, role_name
   </sql>
@@ -57,4 +63,28 @@
     set role_name = #{roleName,jdbcType=VARCHAR}
     where role_id = #{roleId,jdbcType=BIGINT}
   </update>
+
+    <select id="list" resultMap="BaseResultMap">
+        SELECT  <include refid="Base_Column_List"/> FROM role_info
+    </select>
+
+    <select id="listByUserId" resultMap="ResultWidthRoleStatusMap" parameterType="java.lang.Long">
+        SELECT
+            r.role_id,
+            role_name,
+            IF (u.user_id IS NULL, 0, 1) AS role_status
+        FROM
+            role_info r
+        LEFT JOIN (
+            SELECT
+                *
+            FROM
+                user_role_info
+            WHERE
+                user_id = #{userId,jdbcType=BIGINT}
+        ) u ON r.role_id = u.role_id
+    </select>
+
+
+
 </mapper>
