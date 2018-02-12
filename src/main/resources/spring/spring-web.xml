@@ -32,7 +32,26 @@
 
     <!-- Enables the Spring MVC @Controller programming model -->
     <mvc:annotation-driven conversion-service="conversionService"
-                           validator="validator"></mvc:annotation-driven>
+                           validator="validator">
+        <mvc:message-converters register-defaults="true">
+            <!-- 将Jackson2HttpMessageConverter的默认格式化输出为true -->
+            <!-- 配置Fastjson支持 -->
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json</value>
+                        <value>text/html;charset=UTF-8</value>
+                    </list>
+                </property>
+                <property name="features">
+                    <list>
+                        <!--<value>WriteMapNullValue</value>-->
+                        <value>QuoteFieldNames</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
     <context:component-scan base-package="top.yuyufeng.learn.shiro.action"/>
 
