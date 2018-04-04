@@ -54,6 +54,7 @@
 <script>
     var yui = new YUI('#my-yui')
     yui.customConfig = {
+        head:['角色ID',"角色名"],
         server:"/authority/role/list"
 //        checkBox:"single"
     }

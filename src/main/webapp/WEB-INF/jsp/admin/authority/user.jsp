@@ -111,6 +111,57 @@
     }
     yui.create()
 
+
+    function addItem() {
+        console.log("增加")
+    }
+
+    function deleteItem() {
+        var ids = listSelectIds();
+        console.log(ids)
+    }
+
+    function editItem() {
+        var ids = listSelectIds();
+        console.log(ids)
+    }
+
+    function roleItem() {
+        var selectedId = yui_listSelectId();
+        //正在修改的userId
+        $("#saving-user-id").val(selectedId)
+        //角色信息
+        $.get("/authority/role/list/" + selectedId, function (res) {
+            var str = "";
+            for (var i = 0; i < res.length; i++) {
+                if (res[i].roleStatus) {
+                    str += "<li class='list-group-item'><div class='checkbox'><label><input type='checkbox' checked ' value='" + res[i].roleId + "'>" + res[i].roleName + "</label></div></li>";
+                } else {
+                    str += "<li class='list-group-item'><div class='checkbox'><label><input type='checkbox'  value='" + res[i].roleId + "' >" + res[i].roleName + "</label></div></li>";
+                }
+            }
+            $("#role-list").html(str)
+        })
+        $("#role-modal").modal()
+    }
+
+
+    //修改用户角色
+    function doUserRoleSave() {
+        var savingUserId = $("#saving-user-id").val();
+        var savingUserRoles = [];
+        $("#role-list").find("input").each(function () {
+            var $this = $(this)
+            if ($this.is(":checked")) {
+                //塞入ID
+                savingUserRoles.push($(this).val())
+            }
+        })
+        $.post("/authority/user/role-edit/" + savingUserId, {roleIds: savingUserRoles}, function (res) {
+            $("#role-modal").modal("toggle")
+        })
+    }
+
 </script>
 </html>
 
