@@ -31,9 +31,12 @@ public class RoleInfoDaoTest {
     @Test
     public void testPage(){
         PageHelper.startPage(1, 10);
-        List<RoleInfo> list = roleInfoMapper.list();
+        List<RoleInfo> list = roleInfoMapper.selectAll();
         PageInfo<RoleInfo> pageInfo = new PageInfo<>(list,8);
         System.out.println(pageInfo);
+        for (RoleInfo roleInfo : list) {
+            System.out.println(roleInfo);
+        }
 
     }
 

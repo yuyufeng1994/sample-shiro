@@ -1,24 +1,13 @@
 package top.yuyufeng.learn.shiro.dao;
 
+import org.apache.ibatis.annotations.Param;
+import tk.mybatis.mapper.common.Mapper;
 import top.yuyufeng.learn.shiro.orm.po.UserRoleInfo;
 
 import java.util.List;
 
-public interface UserRoleInfoMapper {
+public interface UserRoleInfoMapper extends Mapper<UserRoleInfo> {
 
-    int deleteByPrimaryKey(Long id);
+    Integer insertUserRoleBatch(@Param("userRoleInfoList") List<UserRoleInfo> userRoleInfoList);
 
-    int insert(UserRoleInfo record);
-
-    int insertSelective(UserRoleInfo record);
-
-    UserRoleInfo selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(UserRoleInfo record);
-
-    int updateByPrimaryKey(UserRoleInfo record);
-
-    int deleteByUserId(Long userId);
-
-    Integer insertUserRoleBatch(List<UserRoleInfo> userRoleInfoList);
 }

@@ -1,17 +1,7 @@
 package top.yuyufeng.learn.shiro.dao;
 
+import tk.mybatis.mapper.common.Mapper;
 import top.yuyufeng.learn.shiro.orm.po.RolePermissionInfo;
 
-public interface RolePermissionInfoMapper {
-    int deleteByPrimaryKey(Long id);
-
-    int insert(RolePermissionInfo record);
-
-    int insertSelective(RolePermissionInfo record);
-
-    RolePermissionInfo selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(RolePermissionInfo record);
-
-    int updateByPrimaryKey(RolePermissionInfo record);
+public interface RolePermissionInfoMapper extends Mapper<RolePermissionInfo> {
 }

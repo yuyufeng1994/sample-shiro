@@ -80,12 +80,14 @@
         </property>
     </bean>
 
-    <!-- 配置扫描Dao接口包，动态实现Dao接口，并注入到spring容器中 -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <!-- 注入sqlSessionFactory -->
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-        <!-- 给出需要扫描的Dao接口包 -->
+
+    <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="top.yuyufeng.learn.shiro.dao"/>
+        <property name="properties">
+            <value>
+                mappers=tk.mybatis.mapper.common.Mapper
+            </value>
+        </property>
     </bean>
 
 

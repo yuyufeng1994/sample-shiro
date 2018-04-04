@@ -118,7 +118,10 @@ public class AuthorAction {
     Integer editRoleByUserId(@PathVariable("userId") Long userId, @RequestParam(value = "roleIds[]", required = false) Long[] roleIds, HttpServletRequest request) {
         List<UserRoleInfo> userRoleInfoList = new ArrayList<>();
         for (Long roleId : roleIds) {
-            userRoleInfoList.add(new UserRoleInfo(userId,roleId));
+            UserRoleInfo userRoleInfo = new UserRoleInfo();
+            userRoleInfo.setUserId(userId);
+            userRoleInfo.setRoleId(roleId);
+            userRoleInfoList.add(userRoleInfo);
         }
         return authorService.editUserRole(userRoleInfoList);
     }

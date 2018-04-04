@@ -1,90 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="top.yuyufeng.learn.shiro.dao.RoleInfoMapper">
-
     <resultMap id="BaseResultMap" type="top.yuyufeng.learn.shiro.orm.po.RoleInfo">
-        <result property="roleId" column="role_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
-        <result property="roleName" column="role_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <constructor>
+            <idArg column="role_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="role_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        </constructor>
     </resultMap>
-
-    <resultMap id="ResultWidthRoleStatusMap" type="top.yuyufeng.learn.shiro.orm.po.RoleInfo">
-        <result property="roleId" column="role_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
-        <result property="roleName" column="role_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result property="roleStatus" column="role_status" javaType="java.lang.Boolean" jdbcType="TINYINT"/>
-    </resultMap>
-
     <sql id="Base_Column_List">
-    role_id, role_name
-  </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from role_info
-        where role_id = #{roleId,jdbcType=BIGINT}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from role_info
-    where role_id = #{roleId,jdbcType=BIGINT}
-  </delete>
-    <insert id="insert" parameterType="top.yuyufeng.learn.shiro.orm.po.RoleInfo">
-    insert into role_info (role_id, role_name)
-    values (#{roleId,jdbcType=BIGINT}, #{roleName,jdbcType=VARCHAR})
-  </insert>
-    <insert id="insertSelective" parameterType="top.yuyufeng.learn.shiro.orm.po.RoleInfo">
-        insert into role_info
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="roleId != null">
-                role_id,
-            </if>
-            <if test="roleName != null">
-                role_name,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="roleId != null">
-                #{roleId,jdbcType=BIGINT},
-            </if>
-            <if test="roleName != null">
-                #{roleName,jdbcType=VARCHAR},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="top.yuyufeng.learn.shiro.orm.po.RoleInfo">
-        update role_info
-        <set>
-            <if test="roleName != null">
-                role_name = #{roleName,jdbcType=VARCHAR},
-            </if>
-        </set>
-        where role_id = #{roleId,jdbcType=BIGINT}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="top.yuyufeng.learn.shiro.orm.po.RoleInfo">
-    update role_info
-    set role_name = #{roleName,jdbcType=VARCHAR}
-    where role_id = #{roleId,jdbcType=BIGINT}
-  </update>
+        <!--
+          WARNING - @mbg.generated
+        -->
+        role_id, role_name
+    </sql>
 
-    <select id="list" resultMap="BaseResultMap">
-        SELECT  <include refid="Base_Column_List"/> FROM role_info
-    </select>
-
-    <select id="listByUserId" resultMap="ResultWidthRoleStatusMap" parameterType="java.lang.Long">
-        SELECT
-            r.role_id,
-            role_name,
-            IF (u.user_id IS NULL, 0, 1) AS role_status
-        FROM
-            role_info r
-        LEFT JOIN (
-            SELECT
-                *
-            FROM
-                user_role_info
-            WHERE
-                user_id = #{userId,jdbcType=BIGINT}
-        ) u ON r.role_id = u.role_id
-    </select>
-
-
+    <select id="listByUserId" resultType="top.yuyufeng.learn.shiro.orm.po.RoleInfo">
+SELECT
+    r.role_id,
+    role_name,
+    IF (u.user_id IS NULL, 0, 1) AS role_status
+FROM
+    role_info r
+LEFT JOIN (
+    SELECT
+        *
+    FROM
+        user_role_info
+    WHERE
+        user_id = #{userId,jdbcType=BIGINT}
+    ) u ON r.role_id = u.role_id
+  </select>
 
 </mapper>

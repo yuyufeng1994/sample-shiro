@@ -1,21 +1,7 @@
 package top.yuyufeng.learn.shiro.dao;
 
+import tk.mybatis.mapper.common.Mapper;
 import top.yuyufeng.learn.shiro.orm.po.PermissionInfo;
 
-import java.util.List;
-
-public interface PermissionInfoMapper {
-    int deleteByPrimaryKey(Long permissionId);
-
-    int insert(PermissionInfo record);
-
-    int insertSelective(PermissionInfo record);
-
-    PermissionInfo selectByPrimaryKey(Long permissionId);
-
-    int updateByPrimaryKeySelective(PermissionInfo record);
-
-    int updateByPrimaryKey(PermissionInfo record);
-
-    List<PermissionInfo> list();
+public interface PermissionInfoMapper extends Mapper<PermissionInfo> {
 }

@@ -211,6 +211,22 @@
         </dependency>
         <!-- 数据库相关的依赖 end-->
 
+        <!--mybatis自动化mapper插件tk.mybatis start-->
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper</artifactId>
+            <version>3.3.9</version>
+        </dependency>
+        <!--mybatis自动化mapper插件tk.mybatis end-->
+
+        <!--mybatis.generator start-->
+        <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
+            <version>1.3.3</version>
+        </dependency>
+        <!--mybatis.generator end-->
+
 
     </dependencies>
     <build>
@@ -236,6 +252,25 @@
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>1.3.3</version>
+                <configuration>
+                    <configurationFile>src/main/resources/generatorConfig.xml</configurationFile>
+                    <verbose>true</verbose>
+                    <overwrite>true</overwrite>
+                </configuration>
+
+
+                <dependencies>
+                    <dependency>
+                        <groupId>org.mybatis.generator</groupId>
+                        <artifactId>mybatis-generator-core</artifactId>
+                        <version>1.3.3</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>tk.mybatis</groupId>
+                        <artifactId>mapper</artifactId>
+                        <version>3.3.9</version>
+                    </dependency>
+                </dependencies>
             </plugin>
 
             <plugin>

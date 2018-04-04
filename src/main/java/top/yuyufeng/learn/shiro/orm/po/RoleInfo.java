@@ -1,34 +1,25 @@
 package top.yuyufeng.learn.shiro.orm.po;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Table(name = "role_info")
 public class RoleInfo {
+    @Id
+    @Column(name = "role_id")
     private Long roleId;
 
+    @Column(name = "role_name")
     private String roleName;
 
+    @Transient
     private Boolean roleStatus;
-
-    public RoleInfo() {
-    }
 
     public RoleInfo(Long roleId, String roleName) {
         this.roleId = roleId;
         this.roleName = roleName;
-    }
-
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-
-    public Long getRoleId() {
-        return roleId;
-    }
-
-    public String getRoleName() {
-        return roleName;
     }
 
     public Boolean getRoleStatus() {
@@ -39,12 +30,43 @@ public class RoleInfo {
         this.roleStatus = roleStatus;
     }
 
+    public RoleInfo() {
+        super();
+    }
+
+    /**
+     * @return role_id
+     */
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    /**
+     * @param roleId
+     */
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
+
+    /**
+     * @return role_name
+     */
+    public String getRoleName() {
+        return roleName;
+    }
+
+    /**
+     * @param roleName
+     */
+    public void setRoleName(String roleName) {
+        this.roleName = roleName == null ? null : roleName.trim();
+    }
+
     @Override
     public String toString() {
         return "RoleInfo{" +
                 "roleId=" + roleId +
                 ", roleName='" + roleName + '\'' +
-                ", roleStatus=" + roleStatus +
                 '}';
     }
 }

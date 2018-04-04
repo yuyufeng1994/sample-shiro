@@ -1,14 +1,19 @@
 package top.yuyufeng.learn.shiro.orm.po;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Table(name = "role_permission_info")
 public class RolePermissionInfo {
+    @Id
     private Long id;
 
+    @Column(name = "role_id")
     private Long roleId;
 
+    @Column(name = "permission_id")
     private Long permissionId;
-
-    public RolePermissionInfo() {
-    }
 
     public RolePermissionInfo(Long id, Long roleId, Long permissionId) {
         this.id = id;
@@ -16,36 +21,49 @@ public class RolePermissionInfo {
         this.permissionId = permissionId;
     }
 
+    public RolePermissionInfo() {
+        super();
+    }
+
+    /**
+     * @return id
+     */
     public Long getId() {
         return id;
     }
 
-    public Long getRoleId() {
-        return roleId;
-    }
-
-    public Long getPermissionId() {
-        return permissionId;
-    }
-
+    /**
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * @return role_id
+     */
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    /**
+     * @param roleId
+     */
     public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
 
-    public void setPermissionId(Long permissionId) {
-        this.permissionId = permissionId;
+    /**
+     * @return permission_id
+     */
+    public Long getPermissionId() {
+        return permissionId;
     }
 
-    @Override
-    public String toString() {
-        return "RolePermissionInfo{" +
-                "id=" + id +
-                ", roleId=" + roleId +
-                ", permissionId=" + permissionId +
-                '}';
+    /**
+     * @param permissionId
+     */
+    public void setPermissionId(Long permissionId) {
+        this.permissionId = permissionId;
     }
 }

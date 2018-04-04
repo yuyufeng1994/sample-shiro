@@ -1,24 +1,19 @@
 package top.yuyufeng.learn.shiro.orm.po;
 
-/**
- * @author yuyufeng
- */
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Table(name = "user_role_info")
 public class UserRoleInfo {
+    @Id
     private Long id;
 
+    @Column(name = "user_id")
     private Long userId;
 
+    @Column(name = "role_id")
     private Long roleId;
-
-    public UserRoleInfo() {
-    }
-
-    public UserRoleInfo(Long userId, Long roleId) {
-        this.userId = userId;
-        this.roleId = roleId;
-    }
-
-
 
     public UserRoleInfo(Long id, Long userId, Long roleId) {
         this.id = id;
@@ -26,36 +21,49 @@ public class UserRoleInfo {
         this.roleId = roleId;
     }
 
+    public UserRoleInfo() {
+        super();
+    }
+
+    /**
+     * @return id
+     */
     public Long getId() {
         return id;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public Long getRoleId() {
-        return roleId;
-    }
-
+    /**
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * @return user_id
+     */
+    public Long getUserId() {
+        return userId;
+    }
+
+    /**
+     * @param userId
+     */
     public void setUserId(Long userId) {
         this.userId = userId;
     }
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
+    /**
+     * @return role_id
+     */
+    public Long getRoleId() {
+        return roleId;
     }
 
-    @Override
-    public String toString() {
-        return "UserRoleInfo{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", roleId=" + roleId +
-                '}';
+    /**
+     * @param roleId
+     */
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
 }

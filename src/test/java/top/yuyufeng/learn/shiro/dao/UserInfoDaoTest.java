@@ -30,7 +30,7 @@ public class UserInfoDaoTest {
     @Test
     public void testPage(){
         PageHelper.startPage(1, 10, "user_id asc");
-        List<UserInfo> list = userInfoMapper.list();
+        List<UserInfo> list = userInfoMapper.selectAll();
         PageInfo<UserInfo> pageInfo = new PageInfo<>(list,8);
         System.out.println(pageInfo);
 
@@ -47,7 +47,7 @@ public class UserInfoDaoTest {
     @Test
     public void testList(){
         PageHelper.startPage(1, 10, "user_id asc");
-        List<UserInfo> list = userInfoMapper.list();
+        List<UserInfo> list = userInfoMapper.selectAll();
         for (UserInfo userInfo : list) {
             System.out.println(userInfo);
         }
