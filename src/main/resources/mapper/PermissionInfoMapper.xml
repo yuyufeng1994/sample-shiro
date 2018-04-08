@@ -5,10 +5,11 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <constructor>
-      <idArg column="permission_id" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="permission_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-    </constructor>
+
+    <id column="permission_id" jdbcType="INTEGER" property="permissionId" />
+    <result column="permission_name" jdbcType="VARCHAR" property="permissionName" />
+    <result column="permission_notes" jdbcType="VARCHAR" property="permissionNotes" />
+
   </resultMap>
   <sql id="Base_Column_List">
     <!--

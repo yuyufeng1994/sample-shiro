@@ -5,10 +5,9 @@
         <!--
           WARNING - @mbg.generated
         -->
-        <constructor>
-            <idArg column="role_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
-            <arg column="role_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        </constructor>
+        <id column="role_id" jdbcType="INTEGER" property="roleId" />
+        <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+        <result column="role_notes" jdbcType="VARCHAR" property="roleNotes" />
     </resultMap>
     <sql id="Base_Column_List">
         <!--

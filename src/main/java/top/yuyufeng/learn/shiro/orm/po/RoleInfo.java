@@ -14,12 +14,20 @@ public class RoleInfo {
     @Column(name = "role_name")
     private String roleName;
 
+    @Column(name = "role_notes")
+    private String roleNotes;
+
     @Transient
     private Boolean roleStatus;
 
-    public RoleInfo(Long roleId, String roleName) {
-        this.roleId = roleId;
-        this.roleName = roleName;
+
+
+    public String getRoleNotes() {
+        return roleNotes;
+    }
+
+    public void setRoleNotes(String roleNotes) {
+        this.roleNotes = roleNotes;
     }
 
     public Boolean getRoleStatus() {

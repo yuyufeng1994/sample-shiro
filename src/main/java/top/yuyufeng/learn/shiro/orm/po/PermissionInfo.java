@@ -13,10 +13,18 @@ public class PermissionInfo {
     @Column(name = "permission_name")
     private String permissionName;
 
-    public PermissionInfo(Long permissionId, String permissionName) {
-        this.permissionId = permissionId;
-        this.permissionName = permissionName;
+    @Column(name = "permission_notes")
+    private String permissionNotes;
+
+    public String getPermissionNotes() {
+        return permissionNotes;
     }
+
+    public void setPermissionNotes(String permissionNotes) {
+        this.permissionNotes = permissionNotes;
+    }
+
+
 
     public PermissionInfo() {
         super();

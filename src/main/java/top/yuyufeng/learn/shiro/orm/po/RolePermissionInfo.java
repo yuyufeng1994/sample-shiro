@@ -15,11 +15,7 @@ public class RolePermissionInfo {
     @Column(name = "permission_id")
     private Long permissionId;
 
-    public RolePermissionInfo(Long id, Long roleId, Long permissionId) {
-        this.id = id;
-        this.roleId = roleId;
-        this.permissionId = permissionId;
-    }
+
 
     public RolePermissionInfo() {
         super();

@@ -39,7 +39,9 @@ public class UserInfoDaoTest {
     @Test
     public void testInsert(){
         for (int i = 50; i < 200; i++) {
-            UserInfo record = new UserInfo(null,"yy"+i,"12345");
+            UserInfo record = new UserInfo();
+            record.setUserName("用户"+i);
+            record.setUserPassword("12345");
             userInfoMapper.insertSelective(record);
         }
     }

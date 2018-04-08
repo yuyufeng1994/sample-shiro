@@ -230,7 +230,7 @@
 
     </dependencies>
     <build>
-        <finalName>learn-shiro</finalName>
+        <finalName>sample-shiro</finalName>
         <resources>
             <resource>
                 <directory>src/main/java</directory>

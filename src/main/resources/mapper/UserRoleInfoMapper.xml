@@ -5,11 +5,9 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <constructor>
-      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="user_id" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="role_id" javaType="java.lang.Long" jdbcType="BIGINT" />
-    </constructor>
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="role_id" jdbcType="BIGINT" property="roleId" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--

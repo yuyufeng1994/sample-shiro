@@ -15,11 +15,7 @@ public class UserRoleInfo {
     @Column(name = "role_id")
     private Long roleId;
 
-    public UserRoleInfo(Long id, Long userId, Long roleId) {
-        this.id = id;
-        this.userId = userId;
-        this.roleId = roleId;
-    }
+
 
     public UserRoleInfo() {
         super();
