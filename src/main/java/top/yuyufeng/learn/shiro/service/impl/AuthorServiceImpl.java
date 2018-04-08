@@ -1,9 +1,10 @@
-package top.yuyufeng.learn.shiro.service;
+package top.yuyufeng.learn.shiro.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import top.yuyufeng.learn.shiro.constant.CommonConfig;
 import top.yuyufeng.learn.shiro.dao.PermissionInfoMapper;
 import top.yuyufeng.learn.shiro.dao.RoleInfoMapper;
@@ -13,6 +14,7 @@ import top.yuyufeng.learn.shiro.orm.po.PermissionInfo;
 import top.yuyufeng.learn.shiro.orm.po.RoleInfo;
 import top.yuyufeng.learn.shiro.orm.po.UserInfo;
 import top.yuyufeng.learn.shiro.orm.po.UserRoleInfo;
+import top.yuyufeng.learn.shiro.service.IAuthorService;
 
 import java.util.List;
 
@@ -21,7 +23,7 @@ import java.util.List;
  * @date 2018/2/11
  */
 @Service
-public class AuthorService {
+public class AuthorServiceImpl implements IAuthorService {
     @Autowired
     private UserInfoMapper userInfoMapper;
     @Autowired
@@ -36,6 +38,7 @@ public class AuthorService {
      * @param pageNum
      * @return
      */
+    @Override
     public PageInfo<UserInfo> pageUser(Integer pageNum) {
         PageHelper.startPage(pageNum, CommonConfig.PAGE_SIZE);
         List<UserInfo> list = userInfoMapper.selectAll();
@@ -48,6 +51,7 @@ public class AuthorService {
      * @param pageNum
      * @return
      */
+    @Override
     public PageInfo<RoleInfo> pageRole(Integer pageNum) {
         PageHelper.startPage(pageNum, CommonConfig.PAGE_SIZE);
         List<RoleInfo> list = roleInfoMapper.selectAll();
@@ -60,6 +64,7 @@ public class AuthorService {
      * @param pageNum
      * @return
      */
+    @Override
     public PageInfo<PermissionInfo> pagePermission(Integer pageNum) {
         PageHelper.startPage(pageNum, CommonConfig.PAGE_SIZE);
         List<PermissionInfo> list = permissionInfoMapper.selectAll();
@@ -67,11 +72,12 @@ public class AuthorService {
         return pageInfo;
     }
 
-
+    @Override
     public List<RoleInfo> listRole(Long userId) {
-       return roleInfoMapper.listByUserId(userId);
+        return roleInfoMapper.listByUserId(userId);
     }
-
+    @Override
+    @Transactional(rollbackFor = Exception.class)
     public Integer editUserRole(List<UserRoleInfo> userRoleInfoList) {
         //删除用户原先的权限
         UserRoleInfo userRoleInfo = new UserRoleInfo();

@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
  * @author yuyufeng
  * @date 2018/2/9
  */
-@Service
-public class UserService {
+public interface IUserService {
 
 }
