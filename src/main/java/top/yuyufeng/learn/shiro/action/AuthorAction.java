@@ -1,18 +1,15 @@
 package top.yuyufeng.learn.shiro.action;
 
-import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import top.yuyufeng.learn.shiro.orm.po.PermissionInfo;
 import top.yuyufeng.learn.shiro.orm.po.RoleInfo;
 import top.yuyufeng.learn.shiro.orm.po.UserInfo;
 import top.yuyufeng.learn.shiro.orm.po.UserRoleInfo;
-import top.yuyufeng.learn.shiro.service.AuthorService;
-import top.yuyufeng.learn.shiro.service.UserService;
+import top.yuyufeng.learn.shiro.service.IAuthorService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -26,8 +23,9 @@ import java.util.List;
 @RequiresRoles("admin")
 @RequestMapping("/authority/")
 public class AuthorAction {
+
     @Autowired
-    private AuthorService authorService;
+    private IAuthorService authorService;
 
     /**
      * 跳转到用户管理页面
