@@ -19,3 +19,5 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="/static/vendor/sbadmin/js/sb-admin-2.js"></script>
+
+<script src="/static/vendor/yui/js/yui.js"></script>

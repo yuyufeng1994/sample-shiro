@@ -11,7 +11,6 @@
 <html lang="en">
 <head>
     <%@include file="/WEB-INF/jsp/include/head.jsp" %>
-    <script src="/static/js/yui.js"></script>
 </head>
 <body>
 
