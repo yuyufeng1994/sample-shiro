@@ -7,6 +7,7 @@
     -->
 
     <id column="permission_id" jdbcType="INTEGER" property="permissionId" />
+    <id column="parent_id" jdbcType="INTEGER" property="parentId" />
     <result column="permission_name" jdbcType="VARCHAR" property="permissionName" />
     <result column="permission_notes" jdbcType="VARCHAR" property="permissionNotes" />
 

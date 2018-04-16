@@ -1,5 +1,6 @@
 package top.yuyufeng.learn.shiro.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,10 @@ import top.yuyufeng.learn.shiro.orm.po.PermissionInfo;
 import top.yuyufeng.learn.shiro.orm.po.RoleInfo;
 import top.yuyufeng.learn.shiro.orm.po.UserInfo;
 import top.yuyufeng.learn.shiro.orm.po.UserRoleInfo;
+import top.yuyufeng.learn.shiro.orm.vo.TreeVO;
 import top.yuyufeng.learn.shiro.service.IAuthorService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,6 +38,7 @@ public class AuthorServiceImpl implements IAuthorService {
 
     /**
      * 获取所有用户分页
+     *
      * @param pageNum
      * @return
      */
@@ -48,6 +52,7 @@ public class AuthorServiceImpl implements IAuthorService {
 
     /**
      * 获取所有角色分页
+     *
      * @param pageNum
      * @return
      */
@@ -61,6 +66,7 @@ public class AuthorServiceImpl implements IAuthorService {
 
     /**
      * 获取所有权限分页
+     *
      * @param pageNum
      * @return
      */
@@ -76,6 +82,7 @@ public class AuthorServiceImpl implements IAuthorService {
     public List<RoleInfo> listRole(Long userId) {
         return roleInfoMapper.listByUserId(userId);
     }
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Integer editUserRole(List<UserRoleInfo> userRoleInfoList) {
@@ -85,5 +92,39 @@ public class AuthorServiceImpl implements IAuthorService {
         userRoleInfoMapper.delete(userRoleInfo);
         //插入用户权限
         return userRoleInfoMapper.insertUserRoleBatch(userRoleInfoList);
+    }
+
+    @Override
+    public List<TreeVO> getPermissionTree() {
+        List<PermissionInfo> permissionInfos = permissionInfoMapper.selectAll();
+        List<TreeVO> treeList = new ArrayList<>();
+        for (int i = 0; i < permissionInfos.size(); i++) {
+            PermissionInfo permissionInfo = permissionInfos.get(i);
+            if (permissionInfo.getParentId() == null) {
+                TreeVO treeVO = new TreeVO();
+                treeVO.setDataId(permissionInfo.getPermissionId());
+                treeVO.setText(permissionInfo.getPermissionNotes());
+                findChilds(treeVO, permissionInfos);
+                treeList.add(treeVO);
+            }
+        }
+        return treeList;
+    }
+
+    private void findChilds(TreeVO treeVO, List<PermissionInfo> permissionInfos) {
+        List<TreeVO> treeChilds = new ArrayList<>();
+        for (int i = 0; i < permissionInfos.size(); i++) {
+            PermissionInfo permissionInfo = permissionInfos.get(i);
+            if (permissionInfo.getParentId() == treeVO.getDataId()) {
+                TreeVO treeChild = new TreeVO();
+                treeChild.setDataId(permissionInfo.getPermissionId());
+                treeChild.setText(permissionInfo.getPermissionNotes());
+                findChilds(treeChild, permissionInfos);
+                treeChilds.add(treeChild);
+            }
+        }
+        if (treeChilds != null && treeChilds.size() > 0) {
+            treeVO.setNodes(treeChilds);
+        }
     }
 }

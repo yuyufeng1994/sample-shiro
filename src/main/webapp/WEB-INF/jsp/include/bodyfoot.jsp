@@ -13,6 +13,8 @@
 
 <!-- Bootstrap Core JavaScript -->
 <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!-- bootstrap-treeview -->
+<script src="/static/vendor/bootstrap/js/bootstrap-treeview.js"></script>
 
 <!-- Metis Menu Plugin JavaScript -->
 <script src="/static/vendor/metisMenu/metisMenu.min.js"></script>

@@ -8,6 +8,7 @@ import top.yuyufeng.learn.shiro.orm.po.PermissionInfo;
 import top.yuyufeng.learn.shiro.orm.po.RoleInfo;
 import top.yuyufeng.learn.shiro.orm.po.UserInfo;
 import top.yuyufeng.learn.shiro.orm.po.UserRoleInfo;
+import top.yuyufeng.learn.shiro.orm.vo.TreeVO;
 
 import java.util.List;
 
@@ -27,4 +28,10 @@ public interface IAuthorService {
 
     @Transactional(rollbackFor = Exception.class)
     Integer editUserRole(List<UserRoleInfo> userRoleInfoList);
+
+    /**
+     * 获取权限树
+     * @return
+     */
+    List<TreeVO> getPermissionTree();
 }

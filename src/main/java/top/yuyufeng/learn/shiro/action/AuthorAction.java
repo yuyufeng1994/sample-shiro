@@ -9,6 +9,8 @@ import top.yuyufeng.learn.shiro.orm.po.PermissionInfo;
 import top.yuyufeng.learn.shiro.orm.po.RoleInfo;
 import top.yuyufeng.learn.shiro.orm.po.UserInfo;
 import top.yuyufeng.learn.shiro.orm.po.UserRoleInfo;
+import top.yuyufeng.learn.shiro.orm.vo.JsonResult;
+import top.yuyufeng.learn.shiro.orm.vo.TreeVO;
 import top.yuyufeng.learn.shiro.service.IAuthorService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -122,6 +124,12 @@ public class AuthorAction {
             userRoleInfoList.add(userRoleInfo);
         }
         return authorService.editUserRole(userRoleInfoList);
+    }
+
+    @RequestMapping(value = "permission/tree", method = RequestMethod.GET)
+    public @ResponseBody JsonResult<List<TreeVO>> listPermissionTree(){
+        List<TreeVO> treeVOList = authorService.getPermissionTree();
+        return new JsonResult(true,"获取成功",treeVOList);
     }
 
 
