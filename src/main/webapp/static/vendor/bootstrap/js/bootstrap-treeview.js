@@ -183,12 +183,14 @@
         this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {
 
             var parentNode = this.getParent(node);
-
             if(parentNode && parentNode.nodes != null ){
                 for(var i = parentNode.nodes.length-1; i >= 0; i--){
                     if(parentNode.nodes[i].nodeId == node.nodeId){
                         parentNode.nodes.splice(i, 1);
                     }
+                }
+                if(parentNode.nodes.length == 0){
+                    parentNode.nodes = null;
                 }
                 this.setInitialStates({ nodes: this.tree }, 0);
                 this.render();

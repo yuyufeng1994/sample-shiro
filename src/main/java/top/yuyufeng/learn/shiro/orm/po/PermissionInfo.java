@@ -68,4 +68,14 @@ public class PermissionInfo {
     public void setPermissionName(String permissionName) {
         this.permissionName = permissionName == null ? null : permissionName.trim();
     }
+
+    @Override
+    public String toString() {
+        return "PermissionInfo{" +
+                "permissionId=" + permissionId +
+                ", permissionName='" + permissionName + '\'' +
+                ", permissionNotes='" + permissionNotes + '\'' +
+                ", parentId=" + parentId +
+                '}';
+    }
 }

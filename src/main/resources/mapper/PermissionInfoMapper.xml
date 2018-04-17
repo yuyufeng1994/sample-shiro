@@ -1,21 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="top.yuyufeng.learn.shiro.dao.PermissionInfoMapper">
-  <resultMap id="BaseResultMap" type="top.yuyufeng.learn.shiro.orm.po.PermissionInfo">
-    <!--
-      WARNING - @mbg.generated
-    -->
+    <resultMap id="BaseResultMap" type="top.yuyufeng.learn.shiro.orm.po.PermissionInfo">
+        <!--
+          WARNING - @mbg.generated
+        -->
 
-    <id column="permission_id" jdbcType="INTEGER" property="permissionId" />
-    <id column="parent_id" jdbcType="INTEGER" property="parentId" />
-    <result column="permission_name" jdbcType="VARCHAR" property="permissionName" />
-    <result column="permission_notes" jdbcType="VARCHAR" property="permissionNotes" />
+        <id column="permission_id" jdbcType="BIGINT" property="permissionId"/>
+        <id column="parent_id" jdbcType="BIGINT" property="parentId"/>
+        <result column="permission_name" jdbcType="VARCHAR" property="permissionName"/>
+        <result column="permission_notes" jdbcType="VARCHAR" property="permissionNotes"/>
 
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    permission_id, permission_name
-  </sql>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        permission_id, permission_name
+    </sql>
+
+    <insert id="insertAndBackGeneratedKey" useGeneratedKeys="true" keyProperty="permissionId"
+            parameterType="top.yuyufeng.learn.shiro.orm.po.PermissionInfo">
+        INSERT INTO permission_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="permissionName != null">
+                permission_name,
+            </if>
+            <if test="permissionNotes != null">
+                permission_notes,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="parentId != null">
+                #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="permissionName != null">
+                #{permissionName,jdbcType=VARCHAR},
+            </if>
+            <if test="permissionNotes != null">
+                #{permissionNotes,jdbcType=VARCHAR},
+            </if>
+        </trim>
+
+
+    </insert>
+
+    <delete id="deleteByIds" parameterType="java.util.List">
+        DELETE FROM permission_info WHERE permission_id in
+        <foreach collection="PermissionInfoList" separator="," item="PermissionInfo" open="(" close=")">
+            #{PermissionInfo.permissionId,jdbcType=BIGINT}
+        </foreach>
+    </delete>
 </mapper>

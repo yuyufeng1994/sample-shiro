@@ -133,6 +133,24 @@ public class AuthorAction {
         return new JsonResult(true,"获取成功",treeVOList);
     }
 
+    @RequestMapping(value = "permission/update", method = RequestMethod.POST)
+    public @ResponseBody JsonResult<PermissionInfo> updatePermission(@RequestBody PermissionInfo permissionInfo){
+        PermissionInfo result = authorService.updatePermission(permissionInfo);
+        return new JsonResult(true,"获取成功",result);
+    }
+
+    @RequestMapping(value = "permission/add", method = RequestMethod.POST)
+    public @ResponseBody JsonResult<PermissionInfo> addPermission(@RequestBody PermissionInfo permissionInfo){
+        PermissionInfo result = authorService.addPermission(permissionInfo);
+        return new JsonResult(true,"获取成功",result);
+    }
+
+    @RequestMapping(value = "permission/delete/{permissionId}", method = RequestMethod.GET)
+    public @ResponseBody JsonResult<PermissionInfo> deletePermission(@PathVariable("permissionId") Long permissionId){
+        authorService.deletePermission(permissionId);
+        return new JsonResult(true,"获取成功");
+    }
+
     @RequestMapping(value = "test/tree", method = RequestMethod.POST)
     public @ResponseBody JsonResult<TreeVO> testTree(@RequestBody TreeVO treeVO){
         treeVO.setText("权限1");

@@ -113,6 +113,18 @@ public class AuthorServiceImpl implements IAuthorService {
         return treeList;
     }
 
+    @Override
+    public PermissionInfo updatePermission(PermissionInfo permissionInfo) {
+        permissionInfoMapper.updateByPrimaryKeySelective(permissionInfo);
+        return permissionInfoMapper.selectByPrimaryKey(permissionInfo.getPermissionId());
+    }
+
+    @Override
+    public PermissionInfo addPermission(PermissionInfo permissionInfo) {
+        permissionInfoMapper.insertAndBackGeneratedKey(permissionInfo);
+        return permissionInfo;
+    }
+
     private void findChilds(TreeVO treeVO, List<PermissionInfo> permissionInfos) {
         List<TreeVO> treeChilds = new ArrayList<>();
         for (int i = 0; i < permissionInfos.size(); i++) {
@@ -129,6 +141,25 @@ public class AuthorServiceImpl implements IAuthorService {
         }
         if (treeChilds != null && treeChilds.size() > 0) {
             treeVO.setNodes(treeChilds);
+        }
+    }
+
+    @Override
+    public void deletePermission(Long permissionId){
+        List<PermissionInfo> permissionInfos = permissionInfoMapper.selectAll();
+        List<PermissionInfo> results = new ArrayList<>();
+        PermissionInfo permissionInfo = new PermissionInfo();
+        results.add(permissionInfo);
+        findNodeChilds(permissionId, results, permissionInfos);
+        permissionInfoMapper.deleteByIds(results);
+    }
+
+    private void findNodeChilds(Long id, List<PermissionInfo> results, List<PermissionInfo> permissionInfos) {
+        for (PermissionInfo permissionInfo : permissionInfos) {
+            if (permissionInfo.getParentId() == id) {
+                results.add(permissionInfo);
+                findNodeChilds(permissionInfo.getPermissionId(), results, permissionInfos);
+            }
         }
     }
 }

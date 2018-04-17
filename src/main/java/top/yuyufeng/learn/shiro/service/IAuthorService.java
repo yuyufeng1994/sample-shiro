@@ -34,4 +34,11 @@ public interface IAuthorService {
      * @return
      */
     List<TreeVO> getPermissionTree();
+
+    PermissionInfo updatePermission(PermissionInfo permissionInfo);
+
+    PermissionInfo addPermission(PermissionInfo permissionInfo);
+
+
+    void deletePermission(Long permissionId);
 }

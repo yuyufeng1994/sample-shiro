@@ -23,33 +23,32 @@ public class PermissionDaoTest {
     private PermissionInfoMapper permissionInfoMapper;
 
     @Test
-    public void test(){
+    public void test() {
         List<PermissionInfo> permissionInfos = permissionInfoMapper.selectAll();
         List<TreeVO> treeList = new ArrayList<>();
         for (int i = 0; i < permissionInfos.size(); i++) {
             PermissionInfo permissionInfo = permissionInfos.get(i);
-            if(permissionInfo.getParentId() == null){
+            if (permissionInfo.getParentId() == null) {
                 TreeVO treeVO = new TreeVO();
                 treeVO.setDataId(permissionInfo.getPermissionId());
                 treeVO.setText(permissionInfo.getPermissionNotes());
-                findChilds(treeVO,permissionInfos);
+                findChilds(treeVO, permissionInfos);
                 treeList.add(treeVO);
             }
         }
         System.out.println(JSONObject.toJSON(treeList));
 
-
     }
 
-    private void findChilds(TreeVO treeVO,List<PermissionInfo> permissionInfos){
+    private void findChilds(TreeVO treeVO, List<PermissionInfo> permissionInfos) {
         List<TreeVO> treeChilds = new ArrayList<>();
         for (int i = 0; i < permissionInfos.size(); i++) {
             PermissionInfo permissionInfo = permissionInfos.get(i);
-            if(permissionInfo.getParentId() == treeVO.getDataId()){
+            if (permissionInfo.getParentId() == treeVO.getDataId()) {
                 TreeVO treeChild = new TreeVO();
                 treeChild.setDataId(permissionInfo.getPermissionId());
                 treeChild.setText(permissionInfo.getPermissionNotes());
-                findChilds(treeChild,permissionInfos);
+                findChilds(treeChild, permissionInfos);
                 treeChilds.add(treeChild);
             }
         }
@@ -58,25 +57,41 @@ public class PermissionDaoTest {
 
 
     @Test
-    public void testPage(){
+    public void testPage() {
 
 
     }
 
     @Test
-    public void testInsert(){
+    public void testInsert() {
 
     }
 
     @Test
-    public void testList(){
+    public void testList() {
 
 
     }
 
     @Test
-    public void testGet(){
-
+    public void testGetNodeChilds() {
+        List<PermissionInfo> permissionInfos = permissionInfoMapper.selectAll();
+        Long id = 5L;
+        List<PermissionInfo> results = new ArrayList<>();
+        findNodeChilds(id, results, permissionInfos);
+        for (PermissionInfo result : results) {
+            System.out.println(result);
+        }
     }
+
+    private void findNodeChilds(Long id, List<PermissionInfo> results, List<PermissionInfo> permissionInfos) {
+        for (PermissionInfo permissionInfo : permissionInfos) {
+            if (permissionInfo.getParentId() == id) {
+                results.add(permissionInfo);
+                findNodeChilds(permissionInfo.getPermissionId(), results, permissionInfos);
+            }
+        }
+    }
+
 
 }
