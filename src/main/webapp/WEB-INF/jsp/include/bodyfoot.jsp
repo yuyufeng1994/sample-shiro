@@ -23,3 +23,13 @@
 <script src="/static/vendor/sbadmin/js/sb-admin-2.js"></script>
 
 <script src="/static/vendor/yui/js/yui.js"></script>
+
+<script src="/static/vendor/nprogress/nprogress.js"></script>
+
+<script src="/static/js/common.js"></script>
+
+<script>
+    NProgress.start();
+    NProgress.done();
+//    NProgress.remove();
+</script>

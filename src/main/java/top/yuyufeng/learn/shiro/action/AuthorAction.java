@@ -1,5 +1,6 @@
 package top.yuyufeng.learn.shiro.action;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -130,6 +131,12 @@ public class AuthorAction {
     public @ResponseBody JsonResult<List<TreeVO>> listPermissionTree(){
         List<TreeVO> treeVOList = authorService.getPermissionTree();
         return new JsonResult(true,"获取成功",treeVOList);
+    }
+
+    @RequestMapping(value = "test/tree", method = RequestMethod.POST)
+    public @ResponseBody JsonResult<TreeVO> testTree(@RequestBody TreeVO treeVO){
+        treeVO.setText("权限1");
+        return new JsonResult<>(true,"获取成功",treeVO);
     }
 
 

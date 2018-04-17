@@ -27,6 +27,9 @@
                     <h1 class="page-header">仪表盘</h1>
                 </div>
                 <!-- /.col-lg-12 -->
+                <div class="col-lg-12">
+                    <button class="btn btn-default" onclick="doSomething()">调用Ajax</button>
+                </div>
             </div>
             <!-- /.row -->
         </div>
@@ -38,8 +41,21 @@
 
 <!-- /#wrapper -->
 <%@include file="/WEB-INF/jsp/include/bodyfoot.jsp" %>
-
 </body>
+<script>
+    var requestData = {
+        text:'权限2',
+        name:'pp1'
+    }
+
+    function doSomething() {
+        $POST("/authority/test/tree",requestData,function (res) {
+            console.log(res)
+        })
+    }
+
+
+</script>
 </html>
 
 

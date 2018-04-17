@@ -104,6 +104,8 @@ public class AuthorServiceImpl implements IAuthorService {
                 TreeVO treeVO = new TreeVO();
                 treeVO.setDataId(permissionInfo.getPermissionId());
                 treeVO.setText(permissionInfo.getPermissionNotes());
+                treeVO.setName(permissionInfo.getPermissionName());
+                treeVO.setDataParent(permissionInfo.getParentId());
                 findChilds(treeVO, permissionInfos);
                 treeList.add(treeVO);
             }
@@ -118,7 +120,9 @@ public class AuthorServiceImpl implements IAuthorService {
             if (permissionInfo.getParentId() == treeVO.getDataId()) {
                 TreeVO treeChild = new TreeVO();
                 treeChild.setDataId(permissionInfo.getPermissionId());
+                treeChild.setDataParent(permissionInfo.getParentId());
                 treeChild.setText(permissionInfo.getPermissionNotes());
+                treeChild.setName(permissionInfo.getPermissionName());
                 findChilds(treeChild, permissionInfos);
                 treeChilds.add(treeChild);
             }

@@ -9,7 +9,25 @@ import java.util.List;
 public class TreeVO {
     private Long dataId;
     private String text;
+    private String name;
+    private Long dataParent;
     private List<TreeVO> nodes;
+
+    public Long getDataParent() {
+        return dataParent;
+    }
+
+    public void setDataParent(Long dataParent) {
+        this.dataParent = dataParent;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Long getDataId() {
         return dataId;
@@ -35,11 +53,4 @@ public class TreeVO {
         this.nodes = nodes;
     }
 
-    @Override
-    public String toString() {
-        return "TreeVO{" +
-                "dataId=" + dataId +
-                ", text='" + text + '\'' +
-                '}';
-    }
 }

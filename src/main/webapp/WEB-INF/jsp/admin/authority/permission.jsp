@@ -32,13 +32,53 @@
             </div>
 
             <div class="row">
-                <div class="col-sm-2">
+                <div class="col-sm-4">
                     <div id="permission_treeview" class=""></div>
                 </div>
-                <div class="col-sm-2">
-                    <button onclick="checkAll()">全选</button>
-                    <button onclick="collapseAll()">全部展开</button>
-                    <button onclick="getChecked()">获取选中</button>
+                <div class="col-sm-8">
+                    <h3 align="center">当前选中节点信息</h3>
+                    <hr/>
+                    <form class="form-horizontal">
+                        <input type="hidden" id="nodeId">
+                        <div class="form-group">
+                            <label for="parentId" class="col-sm-2 control-label">父节点ID</label>
+                            <div class="col-sm-10">
+                                <input  class="form-control" id="parentId" placeholder="" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="permissionId" class="col-sm-2 control-label">权限ID</label>
+                            <div class="col-sm-10">
+                                <input  class="form-control" id="permissionId" placeholder="" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="permissionName" class="col-sm-2 control-label">权限key</label>
+                            <div class="col-sm-10">
+                                <input  class="form-control" id="permissionName" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="permissionNotes" class="col-sm-2 control-label">权限描述</label>
+                            <div class="col-sm-10">
+                                <input  class="form-control" id="permissionNotes" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-2">
+                                <button type="button" class="btn btn-primary" onclick="editNode()">保存修改</button>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <button  type="button"  class="btn btn-info" onclick="addNode()">增加节点</button>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <button  type="button"  class="btn btn-danger" onclick="removeNode()">删除节点</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
 
@@ -69,9 +109,11 @@
                 expanded: true,
                 // selected: true
             },
+            levels:3,
             onNodeChecked: nodeChecked,
             onNodeUnchecked: nodeUnchecked,
-            onNodeSelected:nodeSelect
+            onNodeSelected:nodeSelect,
+            onNodeUnselected:nodeUnselect
         });
     })
 
@@ -175,11 +217,74 @@
     }
 
     //获取选中的节点
-    function nodeSelect(node) {
-        var result = $my_treeview.treeview('getSelected');
-        console.log(result)
+    function nodeSelect() {
+        var permission = $my_treeview.treeview('getSelected')[0];
+        $("#nodeId").val(permission.nodeId);
+        $("#parentId").val(permission.dataParent);
+        $("#permissionId").val(permission.dataId);
+        $("#permissionNotes").val(permission.text)
+        $("#permissionName").val(permission.name);
     }
 
+    function nodeUnselect() {
+        $("#nodeId").val("")
+        $("#parentId").val("");
+        $("#permissionId").val("");
+        $("#permissionNotes").val("")
+        $("#permissionName").val("");
+    }
+
+    //删除选中节点
+    function removeNode() {
+        console.log("removeNode")
+        var selectedNodes = $my_treeview.treeview('getSelected');
+        if(selectedNodes.length == 0){
+            alert("请先选中节点")
+            return;
+        }
+        $my_treeview.treeview("deleteNode", selectedNodes[0].nodeId);
+    }
+
+
+    /**
+     * 增加节点
+     */
+    function addNode() {
+        //得到选择的节点
+        var nodeDatas = $my_treeview.treeview('getSelected');
+        if(nodeDatas.length == 0){
+            alert("请先选中节点")
+            return;
+        }
+        var nodeData = nodeDatas[0]
+        var dataAdd =  {
+            "dataParent":nodeData.dataId,
+            "text": "权限12",
+            state:{
+                selected:true
+            }
+        };
+        //获取数据，添加到树中
+        $my_treeview.treeview("addNode", [nodeData.nodeId, {node: dataAdd}]);
+        nodeData.state.expanded = true;
+        nodeData.state.selected = false;
+        $my_treeview.treeview("editNode", [nodeData.nodeId, {node: nodeData}]);
+        nodeSelect()
+
+    }
+
+    function editNode() {
+        var nodeDatas = $my_treeview.treeview('getSelected');
+        if(nodeDatas.length == 0){
+            alert("请先选中节点")
+            return;
+        }
+        var nodeData = nodeDatas[0]
+        var dataEdit = nodeData;
+        dataEdit.text =  $("#permissionNotes").val()
+        dataEdit.name = $("#permissionName").val();
+        $my_treeview.treeview("editNode", [nodeData.nodeId, {node: dataEdit}]);
+    }
 </script>
 </html>
 
