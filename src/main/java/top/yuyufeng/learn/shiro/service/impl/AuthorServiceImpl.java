@@ -149,6 +149,7 @@ public class AuthorServiceImpl implements IAuthorService {
         List<PermissionInfo> permissionInfos = permissionInfoMapper.selectAll();
         List<PermissionInfo> results = new ArrayList<>();
         PermissionInfo permissionInfo = new PermissionInfo();
+        permissionInfo.setPermissionId(permissionId);
         results.add(permissionInfo);
         findNodeChilds(permissionId, results, permissionInfos);
         permissionInfoMapper.deleteByIds(results);
