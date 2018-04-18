@@ -63,9 +63,28 @@
     <!-- /#page-wrapper -->
 
 </div>
-
+<div class="modal fade" tabindex="-1" role="dialog" id="permission-modal">
+    <input type="hidden" id="saving-role-id">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">授予权限</h4>
+            </div>
+            <div class="modal-body" style="height: 500px;overflow-y: scroll;">
+                <div id="permission_treeview" class=""></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="doUserRoleSave()">保存</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <!-- /#wrapper -->
 <%@include file="/WEB-INF/jsp/include/bodyfoot.jsp" %>
+
 
 </body>
 <script>
@@ -76,10 +95,131 @@
 //        checkBox:"single"
     }
     yui.create()
+
+
+    var $my_treeview;
     
     function permissionItem() {
         var id = yui_listSelectId();
         console.log(id)
+        //加载权限树
+        $GET("/authority/permission/tree", function (result) {
+            var treeData = result.data;
+            $my_treeview = $('#permission_treeview').treeview({
+                data: treeData,
+                hierarchicalCheck: true,//级联勾选
+                showCheckbox: true,
+                state: {
+                    checked: true,
+                    // disabled: true,
+                    expanded: true,
+                    // selected: true
+                },
+                levels: 3,
+                onNodeChecked: nodeChecked,
+                onNodeUnchecked: nodeUnchecked,
+                onNodeSelected: nodeSelect,
+                onNodeUnselected: nodeUnselect
+            });
+        })
+        $("#permission-modal").modal()
+    }
+
+
+
+
+    //级联选中所有子节点
+    function checkAllSon(node) {
+        $my_treeview.treeview('checkNode', node.nodeId, {silent: true});
+        if (node.nodes != null && node.nodes.length > 0) {
+            for (var i in node.nodes) {
+                checkAllSon(node.nodes[i]);
+            }
+        }
+    }
+
+    var nodeCheckedSilent = false;
+
+    function nodeChecked(event, node) {
+        if (nodeCheckedSilent) {
+            return;
+        }
+        nodeCheckedSilent = true;
+        checkAllParent(node);
+        checkAllSon(node);
+        nodeCheckedSilent = false;
+    }
+
+    var nodeUncheckedSilent = false;
+
+    function nodeUnchecked(event, node) {
+        if (nodeUncheckedSilent)
+            return;
+        nodeUncheckedSilent = true;
+        uncheckAllParent(node);
+        uncheckAllSon(node);
+        nodeUncheckedSilent = false;
+    }
+
+    //选中全部父节点
+    function checkAllParent(node) {
+        $my_treeview.treeview('checkNode', node.nodeId, {silent: true});
+        var parentNode = $my_treeview.treeview('getParent', node.nodeId);
+        if (!("nodeId" in parentNode)) {
+            return;
+        } else {
+            checkAllParent(parentNode);
+        }
+    }
+
+    //取消全部父节点
+    function uncheckAllParent(node) {
+        $my_treeview.treeview('uncheckNode', node.nodeId, {silent: true});
+        var siblings = $my_treeview.treeview('getSiblings', node.nodeId);
+        var parentNode = $my_treeview.treeview('getParent', node.nodeId);
+        if (!("nodeId" in parentNode)) {
+            return;
+        }
+        var isAllUnchecked = true;  //是否全部没选中
+        for (var i in siblings) {
+            if (siblings[i].state.checked) {
+                isAllUnchecked = false;
+                break;
+            }
+        }
+        if (isAllUnchecked) {
+            uncheckAllParent(parentNode);
+        }
+
+    }
+
+    //级联选中所有子节点
+    function checkAllSon(node) {
+        $my_treeview.treeview('checkNode', node.nodeId, {silent: true});
+        if (node.nodes != null && node.nodes.length > 0) {
+            for (var i in node.nodes) {
+                checkAllSon(node.nodes[i]);
+            }
+        }
+    }
+
+    //级联取消所有子节点
+    function uncheckAllSon(node) {
+        $my_treeview.treeview('uncheckNode', node.nodeId, {silent: true});
+        if (node.nodes != null && node.nodes.length > 0) {
+            for (var i in node.nodes) {
+                uncheckAllSon(node.nodes[i]);
+            }
+        }
+    }
+
+    //获取选中的节点
+    function nodeSelect() {
+        var permission = $my_treeview.treeview('getSelected')[0];
+
+    }
+
+    function nodeUnselect() {
     }
 </script>
 </html>

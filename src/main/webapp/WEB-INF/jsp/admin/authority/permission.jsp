@@ -110,8 +110,6 @@
                 // selected: true
             },
             levels: 3,
-            onNodeChecked: nodeChecked,
-            onNodeUnchecked: nodeUnchecked,
             onNodeSelected: nodeSelect,
             onNodeUnselected: nodeUnselect
         });
@@ -130,90 +128,7 @@
         console.log(result)
     }
 
-    //级联选中所有子节点
-    function checkAllSon(node) {
-        $my_treeview.treeview('checkNode', node.nodeId, {silent: true});
-        if (node.nodes != null && node.nodes.length > 0) {
-            for (var i in node.nodes) {
-                checkAllSon(node.nodes[i]);
-            }
-        }
-    }
 
-    var nodeCheckedSilent = false;
-
-    function nodeChecked(event, node) {
-        if (nodeCheckedSilent) {
-            return;
-        }
-        nodeCheckedSilent = true;
-        checkAllParent(node);
-        checkAllSon(node);
-        nodeCheckedSilent = false;
-    }
-
-    var nodeUncheckedSilent = false;
-
-    function nodeUnchecked(event, node) {
-        if (nodeUncheckedSilent)
-            return;
-        nodeUncheckedSilent = true;
-        uncheckAllParent(node);
-        uncheckAllSon(node);
-        nodeUncheckedSilent = false;
-    }
-
-    //选中全部父节点
-    function checkAllParent(node) {
-        $my_treeview.treeview('checkNode', node.nodeId, {silent: true});
-        var parentNode = $my_treeview.treeview('getParent', node.nodeId);
-        if (!("nodeId" in parentNode)) {
-            return;
-        } else {
-            checkAllParent(parentNode);
-        }
-    }
-
-    //取消全部父节点
-    function uncheckAllParent(node) {
-        $my_treeview.treeview('uncheckNode', node.nodeId, {silent: true});
-        var siblings = $my_treeview.treeview('getSiblings', node.nodeId);
-        var parentNode = $my_treeview.treeview('getParent', node.nodeId);
-        if (!("nodeId" in parentNode)) {
-            return;
-        }
-        var isAllUnchecked = true;  //是否全部没选中
-        for (var i in siblings) {
-            if (siblings[i].state.checked) {
-                isAllUnchecked = false;
-                break;
-            }
-        }
-        if (isAllUnchecked) {
-            uncheckAllParent(parentNode);
-        }
-
-    }
-
-    //级联选中所有子节点
-    function checkAllSon(node) {
-        $my_treeview.treeview('checkNode', node.nodeId, {silent: true});
-        if (node.nodes != null && node.nodes.length > 0) {
-            for (var i in node.nodes) {
-                checkAllSon(node.nodes[i]);
-            }
-        }
-    }
-
-    //级联取消所有子节点
-    function uncheckAllSon(node) {
-        $my_treeview.treeview('uncheckNode', node.nodeId, {silent: true});
-        if (node.nodes != null && node.nodes.length > 0) {
-            for (var i in node.nodes) {
-                uncheckAllSon(node.nodes[i]);
-            }
-        }
-    }
 
     //获取选中的节点
     function nodeSelect() {
@@ -270,7 +185,7 @@
                 selected: true
             }
         };
-        $POST("/authority/permission/add", {
+        $POST_JSON("/authority/permission/add", {
             parentId: dataAdd.dataParent,
             permissionName: dataAdd.text,
             permissionNotes: dataAdd.name
@@ -297,7 +212,7 @@
         var dataEdit = nodeData;
         dataEdit.text = $("#permissionNotes").val()
         dataEdit.name = $("#permissionName").val();
-        $POST("/authority/permission/update", {
+        $POST_JSON("/authority/permission/update", {
             permissionId: $("#permissionId").val(),
             permissionName: $("#permissionName").val(),
             permissionNotes: $("#permissionNotes").val()

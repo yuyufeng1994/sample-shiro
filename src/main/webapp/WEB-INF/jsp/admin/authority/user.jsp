@@ -107,7 +107,7 @@
     yui.customConfig = {
         head:['用户ID',"用户名","用户密码"],
         server:"/authority/user/list",
-//        checkBox:"single"
+        checkBox:"single"
     }
     yui.create()
 
@@ -131,7 +131,7 @@
         //正在修改的userId
         $("#saving-user-id").val(selectedId)
         //角色信息
-        $.get("/authority/role/list/" + selectedId, function (result) {
+        $GET("/authority/role/list/" + selectedId, function (result) {
             var res = result.data;
             var str = "";
             for (var i = 0; i < res.length; i++) {
@@ -158,9 +158,10 @@
                 savingUserRoles.push($(this).val())
             }
         })
-        $.post("/authority/user/role-edit/" + savingUserId, {roleIds: savingUserRoles}, function (res) {
+        $POST("/authority/user/role-edit/" + savingUserId, {roleIds: savingUserRoles}, function (res) {
             $("#role-modal").modal("toggle")
         })
+
     }
 
 </script>

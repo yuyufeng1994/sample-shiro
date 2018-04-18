@@ -82,7 +82,7 @@
 
 
     <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="top.yuyufeng.learn.shiro.dao"/>
+        <property name="basePackage" value="top.yuyufeng.sample.admin.dao"/>
         <property name="properties">
             <value>
                 mappers=tk.mybatis.mapper.common.Mapper

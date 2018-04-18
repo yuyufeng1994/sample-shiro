@@ -53,7 +53,7 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <context:component-scan base-package="top.yuyufeng.learn.shiro.action"/>
+    <context:component-scan base-package="top.yuyufeng.sample.admin.action"/>
 
     <!--2.静态资源默认servlet配置 -->
     <!-- 1).加入对静态资源处理：js,gif,png 2).允许使用 "/" 做整体映射 -->

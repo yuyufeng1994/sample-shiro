@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="top.yuyufeng.learn.shiro.dao.RoleInfoMapper">
-    <resultMap id="BaseResultMap" type="top.yuyufeng.learn.shiro.orm.po.RoleInfo">
+<mapper namespace="top.yuyufeng.sample.admin.dao.RoleInfoMapper">
+    <resultMap id="BaseResultMap" type="top.yuyufeng.sample.admin.orm.po.RoleInfo">
         <!--
           WARNING - @mbg.generated
         -->
@@ -16,7 +16,7 @@
         role_id, role_name
     </sql>
 
-    <select id="listByUserId" resultType="top.yuyufeng.learn.shiro.orm.po.RoleInfo">
+    <select id="listByUserId" resultType="top.yuyufeng.sample.admin.orm.po.RoleInfo">
 SELECT
     r.role_id,
     role_name,
