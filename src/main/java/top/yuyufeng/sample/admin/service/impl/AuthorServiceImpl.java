@@ -125,7 +125,7 @@ public class AuthorServiceImpl implements IAuthorService {
         List<TreeVO> treeChilds = new ArrayList<>();
         for (int i = 0; i < permissionInfos.size(); i++) {
             PermissionInfo permissionInfo = permissionInfos.get(i);
-            if(permissionInfo.getParentId() != null){
+            if (permissionInfo.getParentId() != null) {
                 if (permissionInfo.getParentId().equals(treeVO.getDataId())) {
                     TreeVO treeChild = new TreeVO();
                     treeChild.setDataId(permissionInfo.getPermissionId());
@@ -157,7 +157,7 @@ public class AuthorServiceImpl implements IAuthorService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void updateRolePermissions(List<RolePermissionInfo> rolePermissionInfos) {
-        if(rolePermissionInfos == null || rolePermissionInfos.size() == 0){
+        if (rolePermissionInfos == null || rolePermissionInfos.size() == 0) {
             return;
         }
         RolePermissionInfo rolePermissionInfo = new RolePermissionInfo();
@@ -168,10 +168,13 @@ public class AuthorServiceImpl implements IAuthorService {
 
     private void findNodeChilds(Long id, List<PermissionInfo> results, List<PermissionInfo> permissionInfos) {
         for (PermissionInfo permissionInfo : permissionInfos) {
-            if (permissionInfo.getParentId().equals(id)) {
-                results.add(permissionInfo);
-                findNodeChilds(permissionInfo.getPermissionId(), results, permissionInfos);
+            if (permissionInfo.getParentId() != null) {
+                if (permissionInfo.getParentId().equals(id)) {
+                    results.add(permissionInfo);
+                    findNodeChilds(permissionInfo.getPermissionId(), results, permissionInfos);
+                }
             }
+
         }
     }
 }
