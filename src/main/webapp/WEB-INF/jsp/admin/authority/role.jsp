@@ -29,6 +29,24 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button type="button" onclick="addItem()" class="btn btn-default"><i
+                                class="glyphicon glyphicon-plus"></i> 增加
+                        </button>
+                        <button type="button" onclick="deleteItem()" class="btn btn-default"><i
+                                class="glyphicon glyphicon-minus"></i> 删除
+                        </button>
+                        <button type="button" onclick="editItem()" class="btn btn-default"><i
+                                class="glyphicon glyphicon-pencil"></i> 修改
+                        </button>
+                        <button type="button" onclick="permissionItem()" class="btn btn-default"><i
+                                class="glyphicon glyphicon-user"></i> 权限
+                        </button>
+                    </div>
+                </div>
+            </div>
 
             <!-- /.row -->
             <div class="row">
@@ -58,6 +76,11 @@
 //        checkBox:"single"
     }
     yui.create()
+    
+    function permissionItem() {
+        var id = yui_listSelectId();
+        console.log(id)
+    }
 </script>
 </html>
 

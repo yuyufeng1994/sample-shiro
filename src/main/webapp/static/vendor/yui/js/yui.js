@@ -56,7 +56,8 @@ YUI.prototype = {
 
 
 function yui_dataPage(pageNum) {
-    $.get(YUI_config.server + "?pageNum=" + pageNum, function (res) {
+    $.get(YUI_config.server + "?pageNum=" + pageNum, function (result) {
+        var res = result.data;
         //body标题
         var headDataByList = [];
         //分页编码
@@ -180,5 +181,13 @@ function yui_listSelectId() {
         throw "此操作只能选择一项"
     }
    return ids[0];
+}
+
+function yui_comfirm(message) {
+    if(window.confirm(message)){
+        return true;
+    }else{
+        return false;
+    }
 }
 

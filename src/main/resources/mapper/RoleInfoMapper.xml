@@ -20,12 +20,13 @@
 SELECT
     r.role_id,
     role_name,
+    role_notes,
     IF (u.user_id IS NULL, 0, 1) AS role_status
 FROM
     role_info r
 LEFT JOIN (
     SELECT
-        *
+        id,user_id,role_id
     FROM
         user_role_info
     WHERE

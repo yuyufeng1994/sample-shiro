@@ -235,11 +235,11 @@
 
     //删除选中节点
     function removeNode() {
-        if (!comfirm("确定要删除吗？")) return;
+        if (!yui_comfirm("确定要删除吗？")) return;
         var selectedNodes = $my_treeview.treeview('getSelected');
         if (selectedNodes.length == 0) {
             alert("请先选中节点")
-            return;
+            throw "请先选中节点"
         }
 
         if (selectedNodes[0].parentId != null) {
@@ -259,7 +259,7 @@
         var nodeDatas = $my_treeview.treeview('getSelected');
         if (nodeDatas.length == 0) {
             alert("请先选中节点")
-            return;
+            throw "请先选中节点"
         }
         var nodeData = nodeDatas[0]
         var dataAdd = {
@@ -291,7 +291,7 @@
         var nodeDatas = $my_treeview.treeview('getSelected');
         if (nodeDatas.length == 0) {
             alert("请先选中节点")
-            return;
+            throw "请先选中节点"
         }
         var nodeData = nodeDatas[0]
         var dataEdit = nodeData;

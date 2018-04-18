@@ -73,10 +73,3 @@ function $GET(url, successCallback, errorCallback) {
     })
 }
 
-function comfirm(message) {
-    if(window.confirm(message)){
-        return true;
-    }else{
-        return false;
-    }
-}

@@ -107,7 +107,7 @@
     yui.customConfig = {
         head:['用户ID',"用户名","用户密码"],
         server:"/authority/user/list",
-        checkBox:"single"
+//        checkBox:"single"
     }
     yui.create()
 
@@ -117,12 +117,12 @@
     }
 
     function deleteItem() {
-        var ids = listSelectIds();
+        var ids = yui_listSelectIds();
         console.log(ids)
     }
 
     function editItem() {
-        var ids = listSelectIds();
+        var ids = yui_listSelectIds();
         console.log(ids)
     }
 
@@ -131,13 +131,14 @@
         //正在修改的userId
         $("#saving-user-id").val(selectedId)
         //角色信息
-        $.get("/authority/role/list/" + selectedId, function (res) {
+        $.get("/authority/role/list/" + selectedId, function (result) {
+            var res = result.data;
             var str = "";
             for (var i = 0; i < res.length; i++) {
                 if (res[i].roleStatus) {
-                    str += "<li class='list-group-item'><div class='checkbox'><label><input type='checkbox' checked ' value='" + res[i].roleId + "'>" + res[i].roleName + "</label></div></li>";
+                    str += "<li class='list-group-item'><div class='checkbox'><label><input type='checkbox' checked ' value='" + res[i].roleId + "'>" + res[i].roleNotes + "</label></div></li>";
                 } else {
-                    str += "<li class='list-group-item'><div class='checkbox'><label><input type='checkbox'  value='" + res[i].roleId + "' >" + res[i].roleName + "</label></div></li>";
+                    str += "<li class='list-group-item'><div class='checkbox'><label><input type='checkbox'  value='" + res[i].roleId + "' >" + res[i].roleNotes + "</label></div></li>";
                 }
             }
             $("#role-list").html(str)

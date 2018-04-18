@@ -49,7 +49,7 @@
     }
 
     function doSomething() {
-        $POST("/authority/test/tree",requestData,function (res) {
+        $POST("/authority/role/test/tree",requestData,function (res) {
             console.log(res)
         })
     }
