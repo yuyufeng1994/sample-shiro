@@ -24,11 +24,11 @@
                     <form role="form" action="/do-login" method="post" id="form-login">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="用户名" name="username" type="text" autofocus>
+                                <input class="form-control" placeholder="用户名" name="username" type="text" autofocus value="yyf1">
                             </div>
                             <div class="form-group">
                                 <input class="form-control" placeholder="密码" name="password" type="password"
-                                       value="">
+                                       value="12345">
                             </div>
                             <div class="checkbox">
                                 <label>
