@@ -3,10 +3,7 @@ package top.yuyufeng.sample.admin.service;
 
 import com.github.pagehelper.PageInfo;
 import org.springframework.transaction.annotation.Transactional;
-import top.yuyufeng.sample.admin.orm.po.PermissionInfo;
-import top.yuyufeng.sample.admin.orm.po.RoleInfo;
-import top.yuyufeng.sample.admin.orm.po.UserInfo;
-import top.yuyufeng.sample.admin.orm.po.UserRoleInfo;
+import top.yuyufeng.sample.admin.orm.po.*;
 import top.yuyufeng.sample.admin.orm.vo.TreeVO;
 
 import java.util.List;
@@ -30,9 +27,10 @@ public interface IAuthorService {
 
     /**
      * 获取权限树
+     * @param roleId
      * @return
      */
-    List<TreeVO> getPermissionTree();
+    List<TreeVO> getPermissionTree(Long roleId);
 
     PermissionInfo updatePermission(PermissionInfo permissionInfo);
 
@@ -40,4 +38,10 @@ public interface IAuthorService {
 
 
     void deletePermission(Long permissionId);
+
+    /**
+     *
+     * @param rolePermissionInfos
+     */
+    void updateRolePermissions(List<RolePermissionInfo> rolePermissionInfos);
 }

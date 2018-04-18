@@ -27,7 +27,7 @@ public class PermissionAction {
     @RequestMapping(value = "/tree", method = RequestMethod.GET)
     public @ResponseBody
     JsonResult<List<TreeVO>> listPermissionTree(){
-        List<TreeVO> treeVOList = authorService.getPermissionTree();
+        List<TreeVO> treeVOList = authorService.getPermissionTree(null);
         return new JsonResult(true,"获取成功",treeVOList);
     }
 

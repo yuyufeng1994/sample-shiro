@@ -10,6 +10,7 @@
         <id column="parent_id" jdbcType="BIGINT" property="parentId"/>
         <result column="permission_name" jdbcType="VARCHAR" property="permissionName"/>
         <result column="permission_notes" jdbcType="VARCHAR" property="permissionNotes"/>
+        <result column="checked" jdbcType="BIT" property="checked"/>
 
     </resultMap>
     <sql id="Base_Column_List">
@@ -54,4 +55,21 @@
             #{PermissionInfo.permissionId,jdbcType=BIGINT}
         </foreach>
     </delete>
+
+    <select id="selectAllWithStatus" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+            pi.permission_id,
+            pi.permission_name,
+            pi.permission_notes,
+            pi.parent_id
+        <if test="roleId != null">
+            ,
+            IF (rpi.role_id IS NULL, FALSE, TRUE) AS checked
+        </if>
+        FROM
+            permission_info pi
+        <if test="roleId != null">
+            LEFT JOIN (SELECT role_id,permission_id FROM role_permission_info WHERE role_id = #{roleId,jdbcType=BIGINT}) rpi ON pi.permission_id = rpi.permission_id
+        </if>
+    </select>
 </mapper>

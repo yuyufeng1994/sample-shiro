@@ -57,8 +57,11 @@ public class PermissionDaoTest {
 
 
     @Test
-    public void testPage() {
-
+    public void testSelectAllWithStatus() {
+        List<PermissionInfo> permissionInfoList = permissionInfoMapper.selectAllWithStatus(null);
+        for (PermissionInfo permissionInfo : permissionInfoList) {
+            System.out.println(permissionInfo);
+        }
 
     }
 

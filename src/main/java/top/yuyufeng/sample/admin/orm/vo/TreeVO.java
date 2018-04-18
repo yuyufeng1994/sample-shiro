@@ -1,6 +1,6 @@
 package top.yuyufeng.sample.admin.orm.vo;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * @author yuyufeng
@@ -11,7 +11,24 @@ public class TreeVO {
     private String text;
     private String name;
     private Long dataParent;
+    private Map<String, Boolean> state;
     private List<TreeVO> nodes;
+
+    public Map<String, Boolean> getState() {
+        return state;
+    }
+
+    public void setState(Map<String, Boolean> state) {
+        this.state = state;
+    }
+
+    public void addState(String key, Boolean value) {
+        if (this.state == null) {
+            this.state = new HashMap<>(5);
+        }
+        this.state.put(key, value);
+    }
+
 
     public Long getDataParent() {
         return dataParent;
@@ -54,3 +71,5 @@ public class TreeVO {
     }
 
 }
+
+

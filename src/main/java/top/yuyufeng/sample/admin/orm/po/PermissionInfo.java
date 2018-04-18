@@ -1,8 +1,11 @@
 package top.yuyufeng.sample.admin.orm.po;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Table(name = "permission_info")
 public class PermissionInfo {
@@ -18,6 +21,17 @@ public class PermissionInfo {
 
     @Column(name = "parent_id")
     private Long parentId;
+
+    @Transient
+    private Boolean checked;
+
+    public Boolean getChecked() {
+        return checked;
+    }
+
+    public void setChecked(Boolean checked) {
+        this.checked = checked;
+    }
 
     public Long getParentId() {
         return parentId;
@@ -76,6 +90,7 @@ public class PermissionInfo {
                 ", permissionName='" + permissionName + '\'' +
                 ", permissionNotes='" + permissionNotes + '\'' +
                 ", parentId=" + parentId +
+                ", checked=" + checked +
                 '}';
     }
 }

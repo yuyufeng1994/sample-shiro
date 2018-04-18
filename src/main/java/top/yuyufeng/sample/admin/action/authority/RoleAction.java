@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import top.yuyufeng.sample.admin.orm.po.RoleInfo;
+import top.yuyufeng.sample.admin.orm.po.RolePermissionInfo;
 import top.yuyufeng.sample.admin.orm.vo.JsonResult;
 import top.yuyufeng.sample.admin.orm.vo.TreeVO;
 import top.yuyufeng.sample.admin.service.IAuthorService;
@@ -43,7 +44,7 @@ public class RoleAction {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public @ResponseBody
     JsonResult<PageInfo<RoleInfo>> listRole(Integer pageNum) {
-        return new JsonResult<>(true,"获取成功",authorService.pageRole(pageNum));
+        return new JsonResult<>(true, "获取成功", authorService.pageRole(pageNum));
     }
 
     /**
@@ -55,13 +56,34 @@ public class RoleAction {
     @RequestMapping(value = "/list/{userId}", method = RequestMethod.GET)
     public @ResponseBody
     JsonResult<List<RoleInfo>> listRoleByUserId(@PathVariable("userId") Long userId) {
-        return new JsonResult<>(true,"获取成功",authorService.listRole(userId));
+        return new JsonResult<>(true, "获取成功", authorService.listRole(userId));
     }
 
     @RequestMapping(value = "test/tree", method = RequestMethod.POST)
-    public @ResponseBody JsonResult<TreeVO> testTree(@RequestBody TreeVO treeVO){
+    public @ResponseBody
+    JsonResult<TreeVO> testTree(@RequestBody TreeVO treeVO) {
         treeVO.setText("权限1");
-        return new JsonResult<>(true,"获取成功",treeVO);
+        return new JsonResult<>(true, "获取成功", treeVO);
+    }
+
+    @RequestMapping(value = "/tree/{roleId}", method = RequestMethod.GET)
+    public @ResponseBody
+    JsonResult<List<TreeVO>> listPermissionTree(@PathVariable("roleId") Long roleId) {
+        List<TreeVO> treeVOList = authorService.getPermissionTree(roleId);
+        return new JsonResult(true, "获取成功", treeVOList);
+    }
+
+
+    @RequestMapping(value = "/permissions", method = RequestMethod.POST)
+    public @ResponseBody
+    JsonResult save( @RequestBody List<RolePermissionInfo> rolePermissionInfos) {
+        try{
+            authorService.updateRolePermissions(rolePermissionInfos);
+            return new JsonResult(true, "获取成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return new JsonResult(false, "修改失败");
+        }
     }
 
 

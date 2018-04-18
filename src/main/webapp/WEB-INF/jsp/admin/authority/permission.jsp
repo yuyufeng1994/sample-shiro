@@ -104,7 +104,7 @@
             hierarchicalCheck: true,//级联勾选
 //            showCheckbox: true,
             state: {
-                checked: true,
+//                checked: true,
                 // disabled: true,
                 expanded: true,
                 // selected: true

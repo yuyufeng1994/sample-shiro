@@ -77,7 +77,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="doUserRoleSave()">保存</button>
+                <button type="button" class="btn btn-primary" onclick="doRolePermissionSave()">保存</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -90,20 +90,20 @@
 <script>
     var yui = new YUI('#my-yui')
     yui.customConfig = {
-        head:['角色ID',"角色名","展示"],
-        server:"/authority/role/list"
-//        checkBox:"single"
+        head: ['角色ID', "角色名", "展示"],
+        server: "/authority/role/list",
+        checkBox:"single"
     }
     yui.create()
 
 
     var $my_treeview;
-    
+
     function permissionItem() {
         var id = yui_listSelectId();
         console.log(id)
         //加载权限树
-        $GET("/authority/permission/tree", function (result) {
+        $GET("/authority/role/tree/" + id, function (result) {
             var treeData = result.data;
             $my_treeview = $('#permission_treeview').treeview({
                 data: treeData,
@@ -121,11 +121,26 @@
                 onNodeSelected: nodeSelect,
                 onNodeUnselected: nodeUnselect
             });
+            $("#permission-modal").modal()
         })
-        $("#permission-modal").modal()
+
     }
 
 
+    function doRolePermissionSave() {
+        var selectedId = yui_listSelectId();
+        var checkedPermissions = $my_treeview.treeview('getChecked');
+        var rolePermissions = []
+        for(var i = 0;i < checkedPermissions.length;i++){
+            rolePermissions.push({
+                roleId:selectedId,
+                permissionId:checkedPermissions[i].dataId
+            })
+        }
+        $POST_JSON("/authority/role/permissions",rolePermissions,function (res) {
+            $("#permission-modal").modal("toggle")
+        })
+    }
 
 
     //级联选中所有子节点
@@ -221,6 +236,8 @@
 
     function nodeUnselect() {
     }
+    
+
 </script>
 </html>
 

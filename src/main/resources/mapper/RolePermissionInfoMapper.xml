@@ -15,4 +15,11 @@
     -->
     id, role_id, permission_id
   </sql>
+
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into role_permission_info(role_id, permission_id) values
+    <foreach collection="rolePermissionInfos" index="index" item="item" separator=",">
+      (#{item.roleId,jdbcType=BIGINT},#{item.permissionId,jdbcType=BIGINT})
+    </foreach>
+  </insert>
 </mapper>

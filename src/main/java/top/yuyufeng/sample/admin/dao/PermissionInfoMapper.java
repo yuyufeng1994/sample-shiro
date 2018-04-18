@@ -11,4 +11,6 @@ public interface PermissionInfoMapper extends Mapper<PermissionInfo> {
     int insertAndBackGeneratedKey(PermissionInfo permissionInfo);
 
     void deleteByIds(@Param("PermissionInfoList") List<PermissionInfo> PermissionInfoList);
+
+    List<PermissionInfo> selectAllWithStatus(@Param("roleId") Long roleId);
 }
